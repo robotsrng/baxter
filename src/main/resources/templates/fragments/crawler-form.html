@@ -1,0 +1,33 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<head>
+<title>PdfGen Footer</title>
+</head>
+
+<body>
+	<div th:fragment="crawler-form">
+
+		<form name="crawlerForm" action="#" th:action="@{crawl}" th:object="${spider}" method="POST">
+			<h2 class="form-heading">Create your Spider</h2>
+			<p>The URL Must be of the "Business Categories in ..." webpage. <br> 
+			It starts with "https://www.yellowpages.com.au" then has <br>
+			"/[STATE CODE]/[TOWN]/categories.html"</p>
+			<input type="text" th:field="*{ypURL}" placeholder="YellowPages URL" />
+			<br>
+			<br>
+			<p>If you would like to continue from a certain category letter, <br>
+			enter the single beginning letter here. Default is "a"</p>
+			<input type="text" th:field="*{startCat}" placeholder="Category Start Letter" />
+			<br>
+			<br>
+			<p>If you would like to start or continue from a certain category letter, <br>
+			enter the single beginning letter here. Default is "a"</p>
+			<input type="text" th:field="*{endCat}" placeholder="Category End Letter" />
+			<br>
+			<br>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Crawl</button>
+		</form>
+		<br>
+	</div>
+</body>
+</html>
