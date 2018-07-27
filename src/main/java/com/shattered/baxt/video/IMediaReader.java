@@ -266,20 +266,22 @@ public interface IMediaReader extends IMediaCoder
 
 	public abstract void setDuration(long duration) ;
 
-	public abstract long getTrim() ;
-
-	public abstract void setTrim(long trim) ;
-
-	public abstract long getNewStart() ;
-
-	public abstract void setNewStart(long newStart) ;
-	
 	public abstract CutChecker getCutchecker() ;
+	
+	public abstract void removeCutchecker() ;
 
 	public abstract void setCutchecker(CutChecker cutchecker) ;
 
 	public abstract String getRotation();
 
 	public abstract void setRotation(String rotation);
+
+	public abstract long getTrimStart();
+
+	public abstract long getTrimEnd();
+
+	public abstract void setTrimEnd(long trimEnd);
+
+	public abstract void setTrimStart(long trimStart);
 
 }

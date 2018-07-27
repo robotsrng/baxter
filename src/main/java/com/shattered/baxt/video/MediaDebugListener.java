@@ -237,7 +237,8 @@ class MediaDebugListener extends MediaListenerAdapter implements IMediaDebugList
 
   // handle an event 
 
-  private void handleEvent(Event event, IMediaGenerator tool, Object... args)
+  @SuppressWarnings("incomplete-switch")
+private void handleEvent(Event event, IMediaGenerator tool, Object... args)
   {
     incrementCount(event);
     if ((mFlags & event.getFlag()) != 0 && mMode != NOTHING)

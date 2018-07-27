@@ -1,0 +1,77 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+
+</head>
+<body>
+	<section layout:fragment="content">
+		<h4>What point should your music start from? (Enter in seconds) --></h4>
+		<h4 th:text="${sound}"></h4>
+		<p>
+			(<span th:text="${fsr.soundDuration}"></span> sec total)
+		</p>
+		<form action="#" th:action="@{set-sound-trim}" method="post">
+			<input type="text" name="soundTrim" th:value="${fsr.soundTrim}" />
+			<button th:id="trim-file" type="submit">Save Trim</button>
+		</form>
+		<img th:src="@{'data:image/png;base64,'+${pw.generateBase64Image()}}" />
+
+		<hr>
+		<h3>Trim Files</h3>
+		<p>Enter numbers (in seconds)</p>
+		<a th:href="@{randomize-trim-all}">Randomize</a>
+		<br>
+		<a th:href="@{sort-filespec-alphabet}">Sort By Name</a>
+		<br>
+		<br>
+		<p>
+			Current Duration (<span th:text="${fsr.maxLength}"></span> sec)
+		</p>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">File Name</th>
+					<th scope="col">Trim</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr th:each="file : ${files}">
+					<th scope="row" th:text="${file.origFilename}"></th>
+					<td><form action="#" th:action="@{move-video-up}" method="post">
+							<input type="hidden" name="file" th:value="${file.filename}" />
+							<button th:id="move-video-up" type="submit">Move Up</button>
+						</form></td>
+					<td><form action="#" th:action="@{move-video-down}" method="post">
+							<input type="hidden" name="file" th:value="${file.filename}" />
+							<button th:id="move-video-down" type="submit">Move Down</button>
+						</form></td>
+					<td><form action="#" th:action="@{set-video-trim}" method="post">
+							<input type="hidden" name="filename" th:value="${file.filename}" />
+							<input type="text" name="trimStart" th:value="${file.trimStart}" />
+							<input type="text" name="trimEnd" th:value="${file.trimEnd}" />
+							<button th:id="trim-file" type="submit">Save Trim</button>
+						</form></td>
+					<td><form action="#" th:action="@{copy-video}" method="post">
+							<input type="hidden" name="filepath" th:value="${file.inputURL}" />
+							<button th:id="select-video" type="submit">Copy</button>
+						</form></td>
+					<td><form action="#" th:action="@{remove-file-spec-from-trim}" method="post">
+							<input type="hidden" name="filepath" th:value="${file.filename}" />
+							<button th:id="remove-file-spec" type="submit">Remove</button>
+						</form></td>
+				<tr>
+			</tbody>
+		</table>
+
+		<br>
+		<form action="#" th:action="@{baxt-video}" method="post">
+			<input type="hidden" name="fsr" th:value="${fsr}" />
+			<button th:id="baxt-video" type="submit">Baxt It!</button>
+		</form>
+
+		<br>
+	</section>
+</body>
+
+</html>

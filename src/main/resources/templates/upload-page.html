@@ -1,0 +1,73 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+
+</head>
+<body>
+
+	<section layout:fragment="content">
+		<p>
+			Storage Usage : <span th:text="${storage}"></span>mb / 1000mb
+		</p>
+		<h2>Upload Sound File</h2>
+		<p>The sound file must be a file of type .mp3 or .wav.</p>
+		<form method="post" th:action="@{upload-sound}" enctype="multipart/form-data">
+			<input name="sound" type="file">
+			<br>
+			<input value="Upload" type="submit">
+		</form>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">File Name</th>
+					<th scope="col">Remove</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="file : ${soundFiles}">
+					<th scope="row" th:text="${file.filename}"></th>
+					<td><form action="#" th:action="@{remove-file}" method="post">
+							<input type="hidden" name="username" th:value="${username}" />
+							<input type="hidden" name="filepath" th:value="${file.file.path}" />
+							<button th:id="remove-file" type="submit">Remove</button>
+						</form></td>
+				</tr>
+			</tbody>
+		</table>
+		<h4>Current Background Music --></h4>
+		<h4 th:text="${sound}"></h4>
+		<hr>
+		<h3>Choose Your Videos</h3>
+		<p>The files need to be .mp4 , .mov or .wav</p>
+		<form method="post" th:action="@{upload-video}" enctype="multipart/form-data">
+			<input name="videos" type="file" multiple="multiple">
+			<br>
+			<input value="Upload" type="submit">
+		</form>
+
+		<h3>Uploaded Files</h3>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">File Name</th>
+					<th scope="col">Remove</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="file : ${videoFiles}">
+					<th scope="row" th:text="${file.filename}"></th>
+					<td><form action="#" th:action="@{remove-file}" method="post">
+							<input type="hidden" name="username" th:value="${username}" />
+							<input type="hidden" name="filepath" th:value="${file.file.path}" />
+							<button th:id="remove-file" type="submit">Remove</button>
+						</form></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<br>
+	</section>
+</body>
+
+</html>

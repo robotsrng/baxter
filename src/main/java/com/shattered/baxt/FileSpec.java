@@ -3,9 +3,10 @@ package com.shattered.baxt;
 import com.xuggle.xuggler.IPixelFormat;
 import com.xuggle.xuggler.IPixelFormat.Type;
 
-public class FileSpecOptions {
+public class FileSpec implements Comparable<FileSpec> {
 
-	String filename = null;
+	String origFilename = "" ;
+	String filename = "n/a";
 	String inputURL = null;
 	String outputURL = null ;
 
@@ -23,8 +24,7 @@ public class FileSpecOptions {
 	int sampleRate = 48000;
 	int channels = 0;
 	int abitrate = 150000;
-	//	int vbitrate = 25000000;
-	int vbitrate = 1000000;
+	int vbitrate = 25000000;
 
 	int vbitratetolerance = 0 ;
 	int vquality  = -1;
@@ -36,12 +36,13 @@ public class FileSpecOptions {
 	int isampleRate = 0;
 	int ichannels = 0 ;
 	String cpreset = null;
-	
-	
+
+
 	int height = 0;
 	int width = 0;
-	private String rotation ;
-	long trim ; 
+	private String rotation = "0" ;
+	double trimStart = 1; 
+	double trimEnd = 4; 
 	long duration ;
 
 	Type pixType = IPixelFormat.Type.YUVJ420P ;
@@ -190,13 +191,9 @@ public class FileSpecOptions {
 		return rotation;
 	}
 	public void setRotation(String rotation) {
-		this.rotation = rotation;
-	}
-	public Long getTrim() {
-		return trim;
-	}
-	public void setTrim(long trim) {
-		this.trim = trim * 1000;
+		if(!rotation.equals("") || !rotation.isEmpty() || rotation != null ) {
+			this.rotation = rotation;
+		}
 	}
 	public int getHeight() {
 		return height;
@@ -230,6 +227,28 @@ public class FileSpecOptions {
 	}
 	public String getCpreset() {
 		return cpreset;
+	}
+	public double getTrimStart() {
+		return trimStart;
+	}
+	public void setTrimStart(double trimStart) {
+		this.trimStart = trimStart;
+	}
+	public double getTrimEnd() {
+		return trimEnd;
+	}
+	public void setTrimEnd(double trimEnd) {
+		this.trimEnd = trimEnd;
+	}
+	public String getOrigFilename() {
+		return origFilename;
+	}
+	public void setOrigFilename(String origFilename) {
+		this.origFilename = origFilename;
+	}
+	
+	public int compareTo(FileSpec other) {
+		return origFilename.compareTo(other.origFilename);
 	}
 
 }

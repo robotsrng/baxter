@@ -9,7 +9,6 @@ import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 
 import com.xuggle.mediatool.MediaToolAdapter;
-import com.xuggle.xuggler.IPixelFormat;
 import com.xuggle.xuggler.IVideoPicture;
 import com.xuggle.xuggler.video.BgrConverter;
 
@@ -18,33 +17,24 @@ public class VideoRotator extends MediaToolAdapter {
 	public VideoRotator() {
 	}
 
-	public static BufferedImage resizeImage(IVideoPicture img) {
-		BgrConverter convert1 = new BgrConverter(IPixelFormat.Type.YUV420P, img.getWidth(), img.getHeight(), img.getWidth(), img.getHeight());
+	public static BufferedImage preBaxtImg(int rotate, IVideoPicture img, int outWidth, int outHeight) {
+		BgrConverter convert1 = new BgrConverter(img.getPixelType(), img.getWidth(), img.getHeight(), img.getWidth(), img.getHeight());
 		BufferedImage input = convert1.toImage(img);
-		if(input.getWidth() != 1920 || input.getHeight() != 1080) { 
-			BufferedImage resized = new BufferedImage(1920, 1080, input.getType());
-			Graphics2D g3 = resized.createGraphics();
-			g3.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-					RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-			g3.drawImage(input, 0, 0, 1920, 1080, 0, 0, img.getWidth(),
-					img.getHeight(), null);
-			return resized;
+		if (rotate != 0 ) {
+			input = rotate(rotate, input);
 		}
-		return input;
+		BufferedImage background = new BufferedImage(outWidth, outHeight, BufferedImage.TYPE_3BYTE_BGR);
+		Graphics2D bgGraphics = background.createGraphics();
+		bgGraphics.setColor(Color.BLACK);
+		bgGraphics.fillRect(0, 0, background.getWidth(), background.getHeight());
+		int halfPoint = (background.getWidth()/2) - (input.getWidth()/2); 
+		addImage(background, input, 1, halfPoint, 0) ;
+		return background;
 	}
-	public static BufferedImage rotateImage(int rotate, BufferedImage img) {
 
-		if (rotate == 0 || img == null) {
-			return img;
-		}
-		BufferedImage resized = new BufferedImage(1080, 608, img.getType());
-		Graphics2D g3 = resized.createGraphics();
-		g3.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-				RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		g3.drawImage(img, 0, 0, 1080, 608, 0, 0, img.getWidth(),
-				img.getHeight(), null);
-		int width = resized.getWidth();
-		int height = resized.getHeight();
+	public static BufferedImage rotate(int rotate, BufferedImage input) {
+		int width = input.getWidth();
+		int height = input.getHeight();
 		int new_w = 0, new_h = 0;
 		int new_radian = rotate;
 		if (rotate <= 90) {
@@ -71,22 +61,15 @@ public class VideoRotator extends MediaToolAdapter {
 		affineTransform.rotate(Math.toRadians(rotate), width / 2, height / 2);
 		if (rotate != 180) {
 			AffineTransform translationTransform =
-					findTranslation(affineTransform, resized, rotate);
+					findTranslation(affineTransform, input, rotate);
 			affineTransform.preConcatenate(translationTransform);
 		}
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, new_w, new_h);
 		g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
 				RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		g.drawRenderedImage(resized, affineTransform);
-		BufferedImage background = new
-				BufferedImage(1920, 1080, BufferedImage.TYPE_3BYTE_BGR);
-		int halfPoint = (background.getWidth()/2) - (toStore.getWidth()/2); 
-		Graphics2D g2 = background.createGraphics();
-		g2.setColor(Color.BLACK);
-		g2.fillRect(0, 0, background.getWidth(), background.getHeight());
-		addImage(background, toStore, 1, halfPoint, 0) ;
-		return background;
+		g.drawRenderedImage(input, affineTransform);
+		return toStore;
 	}
 
 	private static void addImage(BufferedImage buff1, BufferedImage buff2,
@@ -106,7 +89,6 @@ public class VideoRotator extends MediaToolAdapter {
 			p2din = new Point2D.Double(0.0, 0.0);
 			p2dout = at.transform(p2din, null);
 			ytrans = p2dout.getY();
-
 			p2din = new Point2D.Double(0, bi.getHeight());
 			p2dout = at.transform(p2din, null);
 			xtrans = p2dout.getX();
@@ -115,51 +97,40 @@ public class VideoRotator extends MediaToolAdapter {
                 p2din = new Point2D.Double(0.0, bi.getHeight());
                 p2dout = at.transform(p2din, null);
                 ytrans = p2dout.getY();
-
                 p2din = new Point2D.Double(bi.getWidth(),bi.getHeight());
                 p2dout = at.transform(p2din, null);
                 xtrans = p2dout.getX();
-
             }*/
 		else if (angle <= 180) {
 			p2din = new Point2D.Double(0.0, bi.getHeight());
 			p2dout = at.transform(p2din, null);
 			ytrans = p2dout.getY();
-
 			p2din = new Point2D.Double(bi.getWidth(), bi.getHeight());
 			p2dout = at.transform(p2din, null);
 			xtrans = p2dout.getX();
-
 		}
 		/*else if(angle<=225){
                 p2din = new Point2D.Double(bi.getWidth(), bi.getHeight());
                 p2dout = at.transform(p2din, null);
                 ytrans = p2dout.getY();
-
                 p2din = new Point2D.Double(bi.getWidth(),0.0);
                 p2dout = at.transform(p2din, null);
                 xtrans = p2dout.getX();
-
             }*/
 		else if (angle <= 270) {
 			p2din = new Point2D.Double(bi.getWidth(), bi.getHeight());
 			p2dout = at.transform(p2din, null);
 			ytrans = p2dout.getY();
-
 			p2din = new Point2D.Double(bi.getWidth(), 0.0);
 			p2dout = at.transform(p2din, null);
 			xtrans = p2dout.getX();
-
 		} else {
 			p2din = new Point2D.Double(bi.getWidth(), 0.0);
 			p2dout = at.transform(p2din, null);
 			ytrans = p2dout.getY();
-
-
 			p2din = new Point2D.Double(0.0, 0.0);
 			p2dout = at.transform(p2din, null);
 			xtrans = p2dout.getX();
-
 		}
 		AffineTransform tat = new AffineTransform();
 		tat.translate(-xtrans, -ytrans);

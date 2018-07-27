@@ -69,7 +69,6 @@ import com.xuggle.mediatool.IMediaCoder;
 import com.xuggle.mediatool.IMediaGenerator;
 import com.xuggle.mediatool.IMediaListener;
 import com.xuggle.mediatool.IMediaViewer;
-import com.xuggle.mediatool.IMediaViewer.Mode;
 import com.xuggle.mediatool.MediaListenerAdapter;
 import com.xuggle.mediatool.event.IAddStreamEvent;
 import com.xuggle.mediatool.event.IAudioSamplesEvent;
@@ -756,7 +755,8 @@ class MediaViewer extends MediaListenerAdapter implements IMediaListener, IMedia
 
   private static void debug(String format, Object... args)
   {
-    Formatter formatter = new Formatter();
+    @SuppressWarnings("resource")
+	Formatter formatter = new Formatter();
     log.debug(formatter.format(format, args).toString());
   }
 

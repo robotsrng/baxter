@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+
+</head>
+<body>
+
+	<section layout:fragment="content">
+		<p th:text="${message0}"></p>
+		<p th:text="${message1}"></p>
+		<p th:text="${message2}"></p>
+		<p th:text="${message3}"></p>
+		<p th:text="${message4}"></p>
+		<p th:text="${message5}"></p>
+		<form name="createUserForm" action="#" th:action="@{signup}" method="POST">
+			<h2 class="form-heading">Create User</h2>
+			<input type="text" th:name="username" placeholder="Username" autofocus="true" />
+			<br>
+			<br>
+			<input type="password" th:name="password" placeholder="Password" />
+			<br>
+			<br>
+			<input type="password" th:name="passConf" placeholder="Confirm Password" />
+			<br>
+			<br>
+			<input type="email" th:name="email" placeholder="Email" />
+			<br>
+			<br>
+
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
+		</form>
+		<br>
+	</section>
+</body>
+</html>

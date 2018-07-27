@@ -30,7 +30,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.shattered.baxt.CutChecker;
-import com.shattered.baxt.FileSpecOptions;
+import com.shattered.baxt.FileSpec;
 import com.xuggle.mediatool.AMediaCoderMixin;
 import com.xuggle.mediatool.IMediaListener;
 import com.xuggle.mediatool.event.AddStreamEvent;
@@ -118,12 +118,12 @@ class MediaReader extends AMediaCoderMixin implements IMediaReader
 
 	private int mBufferedImageType = -1;
 
-	
+
 	long duration;
-	long trim;
-	long newStart ;
+	long trimStart ;
+	long trimEnd;
 	CutChecker cutchecker;
-	private String rotation;
+	private String rotation = "0";
 
 	/**
 	 * Create a MediaReader which reads and dispatches data from a media
@@ -148,10 +148,10 @@ class MediaReader extends AMediaCoderMixin implements IMediaReader
 	{
 		super(url, IContainer.make());
 	}
-	
-	MediaReader(FileSpecOptions file, String url)
+
+	MediaReader(FileSpec file, String url)
 	{
-		
+
 		super(url, IContainer.make());
 	}
 
@@ -571,6 +571,7 @@ class MediaReader extends AMediaCoderMixin implements IMediaReader
 					dispatchAudioSamples(packet.getStreamIndex(), samples);
 			} finally {
 				if (samples != null)
+					dispatchAudioSamples(packet.getStreamIndex(), samples);
 					samples.delete();
 			}
 		}
@@ -761,35 +762,42 @@ class MediaReader extends AMediaCoderMixin implements IMediaReader
 		this.duration = duration;
 	}
 
-	public long getTrim() {
-		return trim;
-	}
-
-	public void setTrim(long trim) {
-		this.trim = trim;
-	}
-
-	public long getNewStart() {
-		return newStart;
-	}
-
-	public void setNewStart(long newStart) {
-		this.newStart = newStart;
-	}
 	public CutChecker getCutchecker() {
 		return cutchecker;
+	}
+	
+	public void removeCutchecker() {
+		this.cutchecker = null;
 	}
 
 	public void setCutchecker(CutChecker cutchecker) {
 		this.cutchecker = cutchecker;
 	}
-	
+
 	public String getRotation() {
 		return rotation;
 	}
 
 	public void setRotation(String rotation) {
-		this.rotation = rotation;
+		if(!rotation.equals("")) {
+			this.rotation = rotation;
+		}
+	}
+
+	public long getTrimStart() {
+		return trimStart;
+	}
+
+	public long getTrimEnd() {
+		return trimEnd;
+	}
+
+	public void setTrimEnd(long trimEnd) {
+		this.trimEnd = trimEnd;
+	}
+
+	public void setTrimStart(long trimStart) {
+		this.trimStart = trimStart;
 	}
 
 }

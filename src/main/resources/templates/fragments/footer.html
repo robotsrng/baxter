@@ -1,5 +1,5 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
 <head>
 <title>PdfGen Footer</title>
 </head>
@@ -13,31 +13,31 @@
 			<a href="/">Home</a>
 			<br>
 			<div sec:authorize="!isAuthenticated()">
-				<a href="/login/login-page">
+				<a href="/login">
 					<span class="sub">Login</span>
 				</a>
 				<br>
 			</div>
 			<div sec:authorize="isAuthenticated()">
-				<a href="/login/logout">
+				<a href="/logout">
 					<span class="sub">Logout</span>
 				</a>
 				<br>
 			</div>
 			<div sec:authorize="isAuthenticated()">
-				<a th:href="@{/gen/show-form}">
+				<a th:href="@{/}">
 					<span class="tabs-text">Generate PDF</span>
 				</a>
 				<br>
 			</div>
 			<div sec:authorize="hasAuthority('ROLE_ADMIN')">
-				<a href="/admin/admin-home">
+				<a th:href="@{/}">
 					<span class="tabs-text">Administration</span>
 				</a>
 				<br>
 			</div>
 			<div sec:authorize="hasAuthority('ROLE_USER')">
-				<a href="/gen/admin-home">
+				<a th:href="@{/}">
 					<span class="tabs-text">Administration</span>
 				</a>
 				<br>
