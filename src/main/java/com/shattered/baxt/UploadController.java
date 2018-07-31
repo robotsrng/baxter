@@ -35,7 +35,12 @@ public class UploadController {
 	public static int uploadVideos(MultipartFile[] mpFiles, String username) {
 		int code = 0 ;
 		for (MultipartFile mpFile : mpFiles) { 
-			if((mpFile.getSize() / 1000000) + getUserStorage(username) > 5000) { 
+			long fileSize = mpFile.getSize();
+			if(fileSize / 1000000 > 500) {
+				code++ ;
+			}
+			if((mpFile.getSize() / 1000000) + getUserStorage(username) > 50000) { 
+				System.out.println("to much storage");
 				return -1;
 			}
 			String origFilename = mpFile.getOriginalFilename();

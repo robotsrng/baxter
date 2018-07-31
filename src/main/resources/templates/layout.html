@@ -5,19 +5,15 @@
 </head>
 
 <body>
-
 	<div th:replace="fragments/navigation :: navigation"></div>
 
-	<div class="container" id="mainContent">
-		<p th:text="${message}"></p>
-		<h3 th:text="${stupidmessage}"></h3>
-		<div class="content" layout:fragment="content"></div>
-		<br>
-	</div>
+	<p th:text="${message}"></p>
+	<h3 th:text="${stupidmessage}"></h3>
+	<div class="main-content container" layout:fragment="content"></div>
 
 
-	<footer>
-		<!-- <div th:replace="fragments/footer :: footer"></div>  -->
-	</footer>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="../js/bootstrap.min.js"></script>
 </body>
 </html>

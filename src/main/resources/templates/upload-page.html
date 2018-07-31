@@ -12,15 +12,19 @@
 		<h2>Upload Sound File</h2>
 		<p>The sound file must be a file of type .mp3 or .wav.</p>
 		<form method="post" th:action="@{upload-sound}" enctype="multipart/form-data">
-			<input name="sound" type="file">
+			<label class="btn btn-sm btn-primary "> <input name="sound" type="file" style="display: none;"> Choose Sound File
+			</label>
 			<br>
-			<input value="Upload" type="submit">
+			<br>
+			<button class="btn btn-sm btn-primary " type="submit">Upload</button>
 		</form>
+		<br>
 		<table class="table">
 			<thead>
 				<tr>
-					<th scope="col">File Name</th>
-					<th scope="col">Remove</th>
+					<th class="col-xs-6" scope="col">File Name</th>
+					<th class="col-xs-3" scope="col">Remove</th>
+					<th class="col-xs-3" scope="col">Change name</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -31,6 +35,11 @@
 							<input type="hidden" name="filepath" th:value="${file.file.path}" />
 							<button th:id="remove-file" type="submit">Remove</button>
 						</form></td>
+					<td><form action="#" th:action="@{change-filename}" method="post">
+							<input type="hidden" name="username" th:value="${username}" />
+							<input type="hidden" name="filepath" th:value="${file.file.path}" />
+							<button th:id="change-filename" type="submit">Change Name</button>
+						</form></td>
 				</tr>
 			</tbody>
 		</table>
@@ -39,10 +48,13 @@
 		<hr>
 		<h3>Choose Your Videos</h3>
 		<p>The files need to be .mp4 , .mov or .wav</p>
+		<p>Files must be smaller than 500mb</p>
 		<form method="post" th:action="@{upload-video}" enctype="multipart/form-data">
-			<input name="videos" type="file" multiple="multiple">
+			<label class="btn btn-sm btn-primary "> <input name="videos" type="file" multiple="multiple" style="display: none;"> Choose Videos
+			</label>
 			<br>
-			<input value="Upload" type="submit">
+			<br>
+			<button class="btn btn-sm btn-primary " type="submit">Upload</button>
 		</form>
 
 		<h3>Uploaded Files</h3>
@@ -50,8 +62,9 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th scope="col">File Name</th>
-					<th scope="col">Remove</th>
+					<th class="col-xs-6" scope="col">File Name</th>
+					<th class="col-xs-3" scope="col">Remove</th>
+					<th class="col-xs-3" scope="col">Change name</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -61,6 +74,11 @@
 							<input type="hidden" name="username" th:value="${username}" />
 							<input type="hidden" name="filepath" th:value="${file.file.path}" />
 							<button th:id="remove-file" type="submit">Remove</button>
+						</form></td>
+					<td><form action="#" th:action="@{change-filename}" method="post">
+							<input type="hidden" name="username" th:value="${username}" />
+							<input type="hidden" name="filepath" th:value="${file.file.path}" />
+							<button th:id="change-filename" type="submit">Change Name</button>
 						</form></td>
 				</tr>
 			</tbody>

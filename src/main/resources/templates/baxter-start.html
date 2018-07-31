@@ -12,8 +12,8 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th scope="col">File Name</th>
-					<th scope="col">Remove</th>
+					<th class="col-xs-6" scope="col">File Name</th>
+					<th class="col-xs-6" scope="col">Remove</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -21,7 +21,7 @@
 					<th scope="row" th:text="${file.filename}"></th>
 					<td><form action="#" th:action="@{select-sound}" method="post">
 							<input type="hidden" name="filename" th:value="${file.file.name}" />
-							<button th:id="select-sound" type="submit">Select Music</button>
+							<button class="btn btn-sm btn-primary " th:id="select-sound" type="submit">Select Music</button>
 						</form></td>
 				</tr>
 			</tbody>
@@ -32,8 +32,8 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th scope="col">File Name</th>
-					<th scope="col">Remove</th>
+					<th class="col-xs-6" scope="col">File Name</th>
+					<th class="col-xs-6" scope="col">Remove</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -41,7 +41,7 @@
 					<th scope="row" th:text="${file.filename}"></th>
 					<td><form action="#" th:action="@{select-video}" method="post">
 							<input type="hidden" name="filepath" th:value="${file.file.path}" />
-							<button th:id="select-video" type="submit">Select Video</button>
+							<button class="btn btn-sm btn-primary " th:id="select-video" type="submit">Select Video</button>
 						</form></td>
 				</tr>
 			</tbody>
@@ -52,12 +52,12 @@
 		<h4 th:text="${sound}"></h4>
 		<br>
 		<a th:href="@{empty-fsr}">Clear</a>
-		
+
 		<table class="table">
 			<thead>
 				<tr>
-					<th scope="col">File Name</th>
-					<th scope="col">Remove</th>
+					<th class="col-xs-6" scope="col">File Name</th>
+					<th class="col-xs-6" scope="col">Remove</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -65,7 +65,7 @@
 					<th scope="row" th:text="${file.origFilename}"></th>
 					<td><form action="#" th:action="@{remove-file-spec}" method="post">
 							<input type="hidden" name="filepath" th:value="${file.filename}" />
-							<button th:id="remove-file-spec" type="submit">Remove</button>
+							<button class="btn btn-sm btn-primary " th:id="remove-file-spec" type="submit">Remove</button>
 						</form></td>
 				</tr>
 			</tbody>
@@ -74,7 +74,7 @@
 		<hr>
 		<form action="#" th:action="@{trim-video}" method="post">
 			<input type="hidden" name="fsr" th:value="${fsr}" />
-			<button th:id="remove-file" type="submit">Trim 'em up!</button>
+			<button class="btn btn-sm btn-primary " th:id="trim-em" type="submit">Trim 'em up!</button>
 		</form>
 
 

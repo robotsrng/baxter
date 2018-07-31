@@ -36,7 +36,7 @@ public class BaxterController {
 		return principal.getName();
 	}
 
-	@RequestMapping("/baxt/baxt-start")
+	@GetMapping("/baxt/baxt-start")
 	public String RefreshBaxterStart(Model model, Principal principal, @ModelAttribute("fsr") FileSpecRepo fsr) {
 		model.addAttribute("sound", new File(fsr.getSoundDirectory()).getName());
 		model.addAttribute("soundFiles", UploadController.getUserSoundFiles(currentUserName(principal)));
@@ -125,7 +125,7 @@ public class BaxterController {
 		model.addAttribute("soundFiles", UploadController.getUserSoundFiles(currentUserName(principal)));
 		model.addAttribute("videoFiles", UploadController.getUserVideoFilesDisplay(currentUserName(principal)));
 		model.addAttribute("specFiles", fsr.getSpecs());
-		return "baxter-start";
+		return "redirect:/baxt/baxt-start";
 	}
 	
 	@PostMapping("baxt/remove-file-spec-from-trim")
@@ -134,10 +134,10 @@ public class BaxterController {
 		model.addAttribute("sound", new File(fsr.getSoundDirectory()).getName());
 		model.addAttribute("fsr", fsr);
 		model.addAttribute("files", fsr.getSpecs());
-		return "trim-video";
+		return "redirect:/baxt/trim-video";
 	}
 	
-	@PostMapping("baxt/select-sound")
+	@RequestMapping("baxt/select-sound")
 	public String selectSound(Model model, Principal principal, @RequestParam("filename") String filename, @ModelAttribute("fsr") FileSpecRepo fsr) {
 		fsr.setSoundDirectory(UploadController.getUserSoundDir(filename, currentUserName(principal)));
 		model.addAttribute("fsr", fsr);
@@ -145,7 +145,7 @@ public class BaxterController {
 		model.addAttribute("soundFiles", UploadController.getUserSoundFiles(currentUserName(principal)));
 		model.addAttribute("videoFiles", UploadController.getUserVideoFilesDisplay(currentUserName(principal)));
 		model.addAttribute("specFiles", fsr.getSpecs());
-		return "baxter-start";
+		return "redirect:/baxt/baxt-start";
 	}
 	
 	@RequestMapping("baxt/select-video")
@@ -156,7 +156,7 @@ public class BaxterController {
 		model.addAttribute("soundFiles", UploadController.getUserSoundFiles(currentUserName(principal)));
 		model.addAttribute("videoFiles", UploadController.getUserVideoFilesDisplay(currentUserName(principal)));
 		model.addAttribute("specFiles", fsr.getSpecs());
-		return "baxter-start";
+		return "redirect:/baxt/baxt-start";
 	}
 	@RequestMapping("baxt/select-video-all")
 	public String selectVideoAll(Model model, Principal principal, @ModelAttribute("fsr") FileSpecRepo fsr) {
@@ -166,7 +166,7 @@ public class BaxterController {
 		model.addAttribute("soundFiles", UploadController.getUserSoundFiles(currentUserName(principal)));
 		model.addAttribute("videoFiles", UploadController.getUserVideoFilesDisplay(currentUserName(principal)));
 		model.addAttribute("specFiles", fsr.getSpecs());
-		return "baxter-start";
+		return "redirect:/baxt/baxt-start";
 	}
 	
 	@RequestMapping("baxt/copy-video")
@@ -175,7 +175,7 @@ public class BaxterController {
 		model.addAttribute("sound", new File(fsr.getSoundDirectory()).getName());
 		model.addAttribute("fsr", fsr);
 		model.addAttribute("files", fsr.getSpecs());
-		return "trim-video";
+		return "redirect:/baxt/trim-video";
 	}
 
 	@RequestMapping("baxt/trim-video")
@@ -206,7 +206,7 @@ public class BaxterController {
 		model.addAttribute("sound", new File(fsr.getSoundDirectory()).getName());
 		model.addAttribute("fsr", fsr);
 		model.addAttribute("files", fsr.getSpecs());
-		return "trim-video";
+		return "redirect:/baxt/trim-video";
 	}
 
 	@RequestMapping("baxt/randomize-trim-all")
@@ -216,7 +216,7 @@ public class BaxterController {
 		model.addAttribute("sound", new File(fsr.getSoundDirectory()).getName());
 		model.addAttribute("fsr", fsr);
 		model.addAttribute("files", fsr.getSpecs());
-		return "trim-video";
+		return "redirect:/baxt/trim-video";
 	}
 	@RequestMapping("baxt/set-sound-trim")
 	public String setSoundTrim(Model model, Principal principal, @RequestParam("soundTrim") String soundTrim, @ModelAttribute("fsr") FileSpecRepo fsr) { 
@@ -227,7 +227,7 @@ public class BaxterController {
 		model.addAttribute("sound", new File(fsr.getSoundDirectory()).getName());
 		model.addAttribute("fsr", fsr);
 		model.addAttribute("files", fsr.getSpecs());
-		return "trim-video";
+		return "redirect:/baxt/trim-video";
 	}
 	
 	@RequestMapping("baxt/set-video-trim")
@@ -238,7 +238,7 @@ public class BaxterController {
 		}
 		model.addAttribute("fsr", fsr);
 		model.addAttribute("files", fsr.getSpecs());
-		return "trim-video";
+		return "redirect:/baxt/trim-video";
 	}
 	
 	@RequestMapping("baxt/move-video-up")
@@ -246,7 +246,7 @@ public class BaxterController {
 		fsr.moveVideoUp(fsr.getFileSpecByFileName(filename));
 		model.addAttribute("fsr", fsr);
 		model.addAttribute("files", fsr.getSpecs());
-		return "trim-video";
+		return "redirect:/baxt/trim-video";
 	}
 	
 	@RequestMapping("baxt/move-video-down")
@@ -254,7 +254,7 @@ public class BaxterController {
 		fsr.moveVideoDown(fsr.getFileSpecByFileName(filename));
 		model.addAttribute("fsr", fsr);
 		model.addAttribute("files", fsr.getSpecs());
-		return "trim-video";
+		return "redirect:/baxt/trim-video";
 	}
 	
 	@RequestMapping("baxt/baxt-video")
