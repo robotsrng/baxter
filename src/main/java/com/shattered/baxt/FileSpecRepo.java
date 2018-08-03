@@ -27,7 +27,7 @@ public class FileSpecRepo {
 	public void addFile(String filepath) {
 		createSpecOpts(filepath);
 	}
-
+	
 	public FileSpec getFileSpecByFileName(String filename) { 
 		for(FileSpec fso : specs) { 
 			if(fso.getFilename().equals(filename)) {
@@ -120,32 +120,30 @@ public class FileSpecRepo {
 	}
 
 	public int setFileTrim(String filename, String trimStart, String trimEnd) {
-		if (Double.parseDouble(trimStart) >= Double.parseDouble(trimEnd)) { 
-			return 1 ;
-		}
+		double start = Math.min(Double.parseDouble(trimStart), Double.parseDouble(trimEnd));
+		double end = Math.max(Double.parseDouble(trimStart), Double.parseDouble(trimEnd));
 		FileSpec workingFS = getFileSpecByFileName(filename);
-		if (Double.parseDouble(trimStart) * 1000 >= workingFS.getDuration()) {
+		if (start * 1000 >= workingFS.getDuration()) {
 			return 2 ;
 		}
 		maxLength -= workingFS.getTrimEnd() - workingFS.getTrimStart() ;
-		workingFS.setTrimStart(Math.round(Double.parseDouble(trimStart)));
-		workingFS.setTrimEnd(Math.round(Double.parseDouble(trimEnd)));
+		workingFS.setTrimStart(round(start, 1));
+		workingFS.setTrimEnd(round(end, 1));
 		maxLength += (workingFS.getTrimEnd() - workingFS.getTrimStart());
+		System.out.println(workingFS.getDuration());
 		return 0 ;
 	}
 	
 	public int setFileTrim(String filename, double trimStart, double trimEnd) {
-		if (trimStart >= trimEnd) { 
-			return 1 ;
-		}
+		double start = Math.min(trimStart, trimEnd);
+		double end = Math.max(trimStart, trimEnd);
 		FileSpec workingFS = getFileSpecByFileName(filename);
-		if (trimStart * 1000 >= workingFS.getDuration()) {
-			System.out.println("2");
+		if (start * 1000 >= workingFS.getDuration()) {
 			return 2 ;
 		}
 		maxLength -= workingFS.getTrimEnd() - workingFS.getTrimStart() ;
-		workingFS.setTrimStart(Math.round(trimStart));
-		workingFS.setTrimEnd(Math.round(trimEnd));
+		workingFS.setTrimStart(round(start, 1));
+		workingFS.setTrimEnd(round(end, 1));
 		maxLength += (workingFS.getTrimEnd() - workingFS.getTrimStart());
 		return 0 ;
 	}
@@ -254,5 +252,9 @@ public class FileSpecRepo {
 		soundDirectory = "";
 	}
 
+	private static double round (double value, int precision) {
+	    int scale = (int) Math.pow(10, precision);
+	    return (double) Math.round(value * scale) / scale;
+	}
 	
 }

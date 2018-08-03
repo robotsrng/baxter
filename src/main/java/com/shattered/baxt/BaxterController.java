@@ -37,7 +37,8 @@ public class BaxterController {
 	}
 
 	@GetMapping("/baxt/baxt-start")
-	public String RefreshBaxterStart(Model model, Principal principal, @ModelAttribute("fsr") FileSpecRepo fsr) {
+	public String RefreshBaxterStart(Model model, Principal principal, @ModelAttribute("fsr") FileSpecRepo fsr, @RequestParam(value = "code", required = false) String code) {
+		model.addAttribute("message", CodeRepo.getMessage(code));
 		model.addAttribute("sound", new File(fsr.getSoundDirectory()).getName());
 		model.addAttribute("soundFiles", UploadController.getUserSoundFiles(currentUserName(principal)));
 		model.addAttribute("videoFiles", UploadController.getUserVideoFilesDisplay(currentUserName(principal)));
@@ -46,7 +47,8 @@ public class BaxterController {
 	}
 	
 	@RequestMapping("/baxt/upload-page")
-	public String showUploadVideoPage(Model model, Principal principal) {
+	public String showUploadVideoPage(Model model, Principal principal, @RequestParam(value = "code", required = false) String code) {
+		model.addAttribute("message", CodeRepo.getMessage(code));
 		model.addAttribute("storage", UploadController.getUserStorage(currentUserName(principal)));
 		model.addAttribute("username", currentUserName(principal));
 		model.addAttribute("soundFiles", UploadController.getUserSoundFiles(currentUserName(principal)));
@@ -55,7 +57,8 @@ public class BaxterController {
 	}
 	
 	@PostMapping("baxt/upload-sound")
-	public String refreshUploadSoundPage(Model model , @RequestParam("sound") MultipartFile multiPartFile, Principal principal) {
+	public String refreshUploadSoundPage(Model model , @RequestParam("sound") MultipartFile multiPartFile, Principal principal, @RequestParam(value = "code", required = false) String code) {
+		model.addAttribute("message", CodeRepo.getMessage(code));
 		if(UploadController.uploadSound(multiPartFile, currentUserName(principal))) {
 			model.addAttribute("message", currentUserName(principal));
 			model.addAttribute("storage", UploadController.getUserStorage(currentUserName(principal)));
@@ -74,7 +77,8 @@ public class BaxterController {
 	}
 
 	@PostMapping("baxt/upload-video")
-	public String refreshUploadPage(Model model , @RequestParam("videos") MultipartFile[] multiPartFiles, Principal principal) {
+	public String refreshUploadPage(Model model , @RequestParam("videos") MultipartFile[] multiPartFiles, Principal principal, @RequestParam(value = "code", required = false) String code) {
+		model.addAttribute("message", CodeRepo.getMessage(code));
 		int errors = UploadController.uploadVideos(multiPartFiles, currentUserName(principal));
 		if(errors == -1) { 
 			model.addAttribute("stupidmessage", "You have used all of your storage space") ;
@@ -98,7 +102,8 @@ public class BaxterController {
 	}
 
 	@RequestMapping("baxt/remove-file")
-	public String removeFile(Model model, Principal principal, @RequestParam("filepath") String filepath, @RequestParam("username") String username) {
+	public String removeFile(Model model, Principal principal, @RequestParam("filepath") String filepath, @RequestParam("username") String username, @RequestParam(value = "code", required = false) String code) {
+		model.addAttribute("message", CodeRepo.getMessage(code));
 		UploadController.removeFile(filepath, username);
 		model.addAttribute("storage", UploadController.getUserStorage(currentUserName(principal)));
 		model.addAttribute("soundFiles", UploadController.getUserSoundFiles(currentUserName(principal)));
@@ -107,7 +112,8 @@ public class BaxterController {
 	}
 	
 	@PostMapping("baxt/remove-file-spec")
-	public String removeFileSpec(Model model, Principal principal, @RequestParam("filepath") String filename, @ModelAttribute("fsr") FileSpecRepo fsr) {
+	public String removeFileSpec(Model model, Principal principal, @RequestParam("filepath") String filename, @ModelAttribute("fsr") FileSpecRepo fsr, @RequestParam(value = "code", required = false) String code) {
+		model.addAttribute("message", CodeRepo.getMessage(code));
 		fsr.removeFileSpec(filename);
 		model.addAttribute("fsr", fsr);
 		model.addAttribute("sound", new File(fsr.getSoundDirectory()).getName());
@@ -128,17 +134,9 @@ public class BaxterController {
 		return "redirect:/baxt/baxt-start";
 	}
 	
-	@PostMapping("baxt/remove-file-spec-from-trim")
-	public String removeFileSpecFromTrim(Model model, Principal principal, @RequestParam("filepath") String filename, @ModelAttribute("fsr") FileSpecRepo fsr) {
-		fsr.removeFileSpec(filename);
-		model.addAttribute("sound", new File(fsr.getSoundDirectory()).getName());
-		model.addAttribute("fsr", fsr);
-		model.addAttribute("files", fsr.getSpecs());
-		return "redirect:/baxt/trim-video";
-	}
-	
 	@RequestMapping("baxt/select-sound")
-	public String selectSound(Model model, Principal principal, @RequestParam("filename") String filename, @ModelAttribute("fsr") FileSpecRepo fsr) {
+	public String selectSound(Model model, Principal principal, @RequestParam("filename") String filename, @ModelAttribute("fsr") FileSpecRepo fsr, @RequestParam(value = "code", required = false) String code) {
+		model.addAttribute("message", CodeRepo.getMessage(code));
 		fsr.setSoundDirectory(UploadController.getUserSoundDir(filename, currentUserName(principal)));
 		model.addAttribute("fsr", fsr);
 		model.addAttribute("sound", new File(fsr.getSoundDirectory()).getName());
@@ -147,9 +145,10 @@ public class BaxterController {
 		model.addAttribute("specFiles", fsr.getSpecs());
 		return "redirect:/baxt/baxt-start";
 	}
-	
+
 	@RequestMapping("baxt/select-video")
-	public String selectVideo(Model model, Principal principal, @RequestParam("filepath") String filepath, @ModelAttribute("fsr") FileSpecRepo fsr) {
+	public String selectVideo(Model model, Principal principal, @RequestParam("filepath") String filepath, @ModelAttribute("fsr") FileSpecRepo fsr, @RequestParam(value = "code", required = false) String code) {
+		model.addAttribute("message", CodeRepo.getMessage(code));
 		fsr.addFile(filepath);
 		model.addAttribute("fsr", fsr);
 		model.addAttribute("sound", new File(fsr.getSoundDirectory()).getName());
@@ -159,7 +158,8 @@ public class BaxterController {
 		return "redirect:/baxt/baxt-start";
 	}
 	@RequestMapping("baxt/select-video-all")
-	public String selectVideoAll(Model model, Principal principal, @ModelAttribute("fsr") FileSpecRepo fsr) {
+	public String selectVideoAll(Model model, Principal principal, @ModelAttribute("fsr") FileSpecRepo fsr, @RequestParam(value = "code", required = false) String code) {
+		model.addAttribute("message", CodeRepo.getMessage(code));
 		fsr.addFileMulti(UploadController.getUserVideoFiles(currentUserName(principal)));
 		model.addAttribute("fsr", fsr);
 		model.addAttribute("sound", new File(fsr.getSoundDirectory()).getName());
@@ -169,17 +169,38 @@ public class BaxterController {
 		return "redirect:/baxt/baxt-start";
 	}
 	
-	@RequestMapping("baxt/copy-video")
-	public String copyVideo(Model model, Principal principal, @RequestParam("filepath") String filepath, @ModelAttribute("fsr") FileSpecRepo fsr) {
-		fsr.addFile(filepath);
+	@PostMapping("baxt/remove-file-spec-from-trim")
+	public String removeFileSpecFromTrim(Model model, Principal principal, @RequestParam("filepath") String filename, @ModelAttribute("fsr") FileSpecRepo fsr, @RequestParam(value = "code", required = false) String code) {
+		model.addAttribute("message", CodeRepo.getMessage(code));
+		fsr.removeFileSpec(filename);
 		model.addAttribute("sound", new File(fsr.getSoundDirectory()).getName());
 		model.addAttribute("fsr", fsr);
 		model.addAttribute("files", fsr.getSpecs());
 		return "redirect:/baxt/trim-video";
 	}
-
+	
+	@RequestMapping("baxt/move-video-up")
+	public String moveVideoUp(Model model, Principal principal, @RequestParam("file") String filename, @ModelAttribute("fsr") FileSpecRepo fsr, @RequestParam(value = "code", required = false) String code) {
+			model.addAttribute("message", CodeRepo.getMessage(code)); 
+			fsr.moveVideoUp(fsr.getFileSpecByFileName(filename));
+			model.addAttribute("fsr", fsr);
+			model.addAttribute("files", fsr.getSpecs());
+			return "redirect:/baxt/trim-video";
+		}
+	
+	
+	@RequestMapping("baxt/move-video-down")
+	public String moveVideoDown(Model model, Principal principal, @RequestParam("file") String filename, @ModelAttribute("fsr") FileSpecRepo fsr, @RequestParam(value = "code", required = false) String code) {
+		model.addAttribute("message", CodeRepo.getMessage(code)); 
+		fsr.moveVideoDown(fsr.getFileSpecByFileName(filename));
+		model.addAttribute("fsr", fsr);
+		model.addAttribute("files", fsr.getSpecs());
+		return "redirect:/baxt/trim-video";
+	}
+	
 	@RequestMapping("baxt/trim-video")
-	public String trimVideo(Model model, Principal principal, @ModelAttribute("fsr") FileSpecRepo fsr) throws IOException {
+	public String trimVideo(Model model, Principal principal, @ModelAttribute("fsr") FileSpecRepo fsr, @RequestParam(value = "code", required = false) String code) throws Exception{
+		model.addAttribute("message", CodeRepo.getMessage(code));
 		if(fsr.getSoundDirectory().equals("")) { 
 			model.addAttribute("sound", new File(fsr.getSoundDirectory()).getName());
 			model.addAttribute("soundFiles", UploadController.getUserSoundFiles(currentUserName(principal)));
@@ -196,12 +217,19 @@ public class BaxterController {
 		return "trim-video";
 	}
 	
-	public byte[] getImage(String imageName, Principal principal) throws IOException{ 
-		return UploadController.getImage(imageName, currentUserName(principal));
+	@RequestMapping("baxt/copy-video")
+	public String copyVideo(Model model, Principal principal, @RequestParam("filepath") String filepath, @ModelAttribute("fsr") FileSpecRepo fsr, @RequestParam(value = "code", required = false) String code) {
+		model.addAttribute("message", CodeRepo.getMessage(code));
+		fsr.addFile(filepath);
+		model.addAttribute("sound", new File(fsr.getSoundDirectory()).getName());
+		model.addAttribute("fsr", fsr);
+		model.addAttribute("files", fsr.getSpecs());
+		return "redirect:/baxt/trim-video";
 	}
 	
 	@RequestMapping("baxt/sort-filespec-alphabet")
-	public String sortFileSpecAlphabet(Model model, Principal principal, @ModelAttribute("fsr") FileSpecRepo fsr) {
+	public String sortFileSpecAlphabet(Model model, Principal principal, @ModelAttribute("fsr") FileSpecRepo fsr, @RequestParam(value = "code", required = false) String code) {
+		model.addAttribute("message", CodeRepo.getMessage(code));
  		fsr.sortByName();
 		model.addAttribute("sound", new File(fsr.getSoundDirectory()).getName());
 		model.addAttribute("fsr", fsr);
@@ -210,7 +238,8 @@ public class BaxterController {
 	}
 
 	@RequestMapping("baxt/randomize-trim-all")
-	public String randomizeTrim(Model model, Principal principal, @ModelAttribute("fsr") FileSpecRepo fsr) {
+	public String randomizeTrim(Model model, Principal principal, @ModelAttribute("fsr") FileSpecRepo fsr, @RequestParam(value = "code", required = false) String code) {
+		model.addAttribute("message", CodeRepo.getMessage(code));
 		fsr.randomizeAll() ;
 		
 		model.addAttribute("sound", new File(fsr.getSoundDirectory()).getName());
@@ -219,7 +248,8 @@ public class BaxterController {
 		return "redirect:/baxt/trim-video";
 	}
 	@RequestMapping("baxt/set-sound-trim")
-	public String setSoundTrim(Model model, Principal principal, @RequestParam("soundTrim") String soundTrim, @ModelAttribute("fsr") FileSpecRepo fsr) { 
+	public String setSoundTrim(Model model, Principal principal, @RequestParam("soundTrim") String soundTrim, @ModelAttribute("fsr") FileSpecRepo fsr, @RequestParam(value = "code", required = false) String code) {
+		model.addAttribute("message", CodeRepo.getMessage(code)); 
 		int res = fsr.setSoundTrim(soundTrim);
 		if ( res > 0)  {
 			model.addAttribute("message", "Your trim amounts are out of bounds.");
@@ -231,7 +261,8 @@ public class BaxterController {
 	}
 	
 	@RequestMapping("baxt/set-video-trim")
-	public String setVideoTrim(Model model, Principal principal, @RequestParam("filename") String filename, @RequestParam("trimStart") String trimStart, @RequestParam("trimEnd") String trimEnd, @ModelAttribute("fsr") FileSpecRepo fsr) { 
+	public String setVideoTrim(Model model, Principal principal, @RequestParam("filename") String filename, @RequestParam("trimStart") String trimStart, @RequestParam("trimEnd") String trimEnd, @ModelAttribute("fsr") FileSpecRepo fsr, @RequestParam(value = "code", required = false) String code) {
+		model.addAttribute("message", CodeRepo.getMessage(code)); 
 		int res = fsr.setFileTrim(filename, trimStart, trimEnd);
 		if ( res > 0)  {
 			model.addAttribute("message", "Your trim amounts are out of bounds.");
@@ -241,24 +272,9 @@ public class BaxterController {
 		return "redirect:/baxt/trim-video";
 	}
 	
-	@RequestMapping("baxt/move-video-up")
-	public String moveVideoUp(Model model, Principal principal, @RequestParam("file") String filename, @ModelAttribute("fsr") FileSpecRepo fsr) { 
-		fsr.moveVideoUp(fsr.getFileSpecByFileName(filename));
-		model.addAttribute("fsr", fsr);
-		model.addAttribute("files", fsr.getSpecs());
-		return "redirect:/baxt/trim-video";
-	}
-	
-	@RequestMapping("baxt/move-video-down")
-	public String moveVideoDown(Model model, Principal principal, @RequestParam("file") String filename, @ModelAttribute("fsr") FileSpecRepo fsr) { 
-		fsr.moveVideoDown(fsr.getFileSpecByFileName(filename));
-		model.addAttribute("fsr", fsr);
-		model.addAttribute("files", fsr.getSpecs());
-		return "redirect:/baxt/trim-video";
-	}
-	
 	@RequestMapping("baxt/baxt-video")
-	public String baxtVideo(Model model, Principal principal, @ModelAttribute("fsr") FileSpecRepo fsr) {
+	public String baxtVideo(Model model, Principal principal, @ModelAttribute("fsr") FileSpecRepo fsr, @RequestParam(value = "code", required = false) String code) {
+		model.addAttribute("message", CodeRepo.getMessage(code));
 		if(fsr.getSpecs().size() < 1 ) { 
 			model.addAttribute("fsr", fsr);
 			model.addAttribute("stupidmessage", "You cannot baxt without videos, idiot.");
@@ -276,7 +292,8 @@ public class BaxterController {
 	}
 
 	@GetMapping("baxt/download")
-	public void downloadCompletedVideo(Model model, HttpServletResponse response, @RequestParam("finalVidLoc") String finalVidLoc) { 
+	public void downloadCompletedVideo(Model model, HttpServletResponse response, @RequestParam("finalVidLoc") String finalVidLoc, @RequestParam(value = "code", required = false) String code) {
+		model.addAttribute("message", CodeRepo.getMessage(code)); 
 		try {
 			File download = new File (finalVidLoc) ;
 			FileInputStream is = new FileInputStream(download) ;
@@ -300,4 +317,9 @@ public class BaxterController {
 		model.addAttribute("message", CodeRepo.getMessage(code));
 		return "error" ;
 	}
+	
+	public byte[] getImage(String imageName, Principal principal) throws IOException{ 
+		return UploadController.getImage(imageName, currentUserName(principal));
+	}
+	
 }

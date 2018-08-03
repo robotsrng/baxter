@@ -5,7 +5,7 @@
 </head>
 <body>
 	<section layout:fragment="content">
-		<h4>What point should your music start from? (Enter in seconds) --></h4>
+		<h4>What point should your music start from? (Enter in seconds)</h4>
 		<h4 th:text="${sound}"></h4>
 		<p>
 			(<span th:text="${fsr.soundDuration}"></span> sec total)
@@ -14,8 +14,9 @@
 			<input type="text" name="soundTrim" th:value="${fsr.soundTrim}" />
 			<button th:id="trim-file" type="submit">Save Trim</button>
 		</form>
-		<img th:src="@{'data:image/png;base64,'+${pw.generateBase64Image()}}" />
-
+		<div class="container">
+			<img class="waveform-img" th:src="@{'data:image/png;base64,'+${pw.generateBase64Image()}}" />
+		</div>
 		<hr>
 		<h3>Trim Files</h3>
 		<p>Enter numbers (in seconds)</p>
@@ -30,36 +31,90 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th scope="col">File Name</th>
-					<th scope="col">Trim</th>
+					<th class="col-xs-2" scope="col">File Name</th>
+					<th class="col-xs-1" scope="col">Up</th>
+					<th class="col-xs-1" scope="col">Down</th>
+					<th class="col-xs-6" scope="col">Trim</th>
+					<th class="col-xs-1" scope="col">Copy</th>
+					<th class="col-xs-1" scope="col">Delete</th>
 				</tr>
 			</thead>
 			<tbody>
 
 				<tr th:each="file : ${files}">
 					<th scope="row" th:text="${file.origFilename}"></th>
-					<td><form action="#" th:action="@{move-video-up}" method="post">
+					<td>
+						<form action="#" th:action="@{trim-action}" method="post">
 							<input type="hidden" name="file" th:value="${file.filename}" />
-							<button th:id="move-video-up" type="submit">Move Up</button>
-						</form></td>
-					<td><form action="#" th:action="@{move-video-down}" method="post">
+							<button th:name="trim-action" th:value="up" id="move-video-up" type="submit">Up</button>
+						</form>
+					</td>
+					<td>
+						<form action="#" th:action="@{move-video-down}" method="post">
 							<input type="hidden" name="file" th:value="${file.filename}" />
-							<button th:id="move-video-down" type="submit">Move Down</button>
-						</form></td>
-					<td><form action="#" th:action="@{set-video-trim}" method="post">
+							<button th:id="move-video-down" type="submit">Down</button>
+						</form>
+					</td>
+					<td class="trim-td">
+						<form action="#" th:action="@{set-video-trim}" method="post">
 							<input type="hidden" name="filename" th:value="${file.filename}" />
-							<input type="text" name="trimStart" th:value="${file.trimStart}" />
-							<input type="text" name="trimEnd" th:value="${file.trimEnd}" />
-							<button th:id="trim-file" type="submit">Save Trim</button>
-						</form></td>
-					<td><form action="#" th:action="@{copy-video}" method="post">
+							<div class="slider-group pull-left">
+								<input type="range" min="0" th:max="${file.duration / 1000 + 1}" step=".5" name="trimStart" th:value="${file.trimStart}" class="form-control-range slider" th:id="|${file.filename + 'start'}|"
+									th:oninput="|showValStart('${file.filename + 'startbox'}', this.value)|" th:onchange="|showValStart('${file.filename + 'startbox'}', this.value)|"
+								>
+								<span class="slider-output" th:id="|${file.filename}startbox|" th:value="${file.trimStart}"></span>
+								<script th:inline="javascript">
+									/*<![CDATA[*/
+									var element = document
+											.getElementById([[${file.filename + 'start'}]]);
+									/*]]>*/
+									if ('fireEvent' in element)
+										element.fireEvent("onchange");
+									else {
+										var evt = document
+												.createEvent("HTMLEvents");
+										evt.initEvent("change", false, true);
+										element.dispatchEvent(evt);
+									}
+								</script>
+								<input type="range" min="0" th:max="${file.duration / 1000 + 1}" step=".5" name="trimEnd" th:value="${file.trimEnd}" class="form-control-range slider" th:id="|${file.filename + 'end'}|"
+									th:oninput="|showValEnd('${file.filename + 'endbox'}', this.value)|" th:onchange="|showValEnd('${file.filename + 'endbox'}', this.value)|"
+								>
+								<div class="output-width">
+									<span class="slider-output" th:id="|${file.filename}endbox|" th:value="${file.trimEnd}"></span>
+									<script th:inline="javascript">
+									/*<![CDATA[*/
+									var element2 = document
+											.getElementById([[${file.filename + 'end'}]]);
+									/*]]>*/
+									if ('fireEvent' in element)
+										element2.fireEvent("onchange");
+									else {
+										var evt2 = document
+												.createEvent("HTMLEvents");
+										evt2.initEvent("change", false, true);
+										element2.dispatchEvent(evt2);
+									}
+								</script>
+								</div>
+							</div>
+							<div class="slider-button pull-right">
+								<button th:id="trim-file" type="submit">Trim</button>
+							</div>
+						</form>
+					</td>
+					<td>
+						<form action="#" th:action="@{copy-video}" method="post">
 							<input type="hidden" name="filepath" th:value="${file.inputURL}" />
 							<button th:id="select-video" type="submit">Copy</button>
-						</form></td>
-					<td><form action="#" th:action="@{remove-file-spec-from-trim}" method="post">
+						</form>
+					</td>
+					<td>
+						<form action="#" th:action="@{remove-file-spec-from-trim}" method="post">
 							<input type="hidden" name="filepath" th:value="${file.filename}" />
 							<button th:id="remove-file-spec" type="submit">Remove</button>
-						</form></td>
+						</form>
+					</td>
 				<tr>
 			</tbody>
 		</table>

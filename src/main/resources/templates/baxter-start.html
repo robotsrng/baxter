@@ -7,71 +7,79 @@
 	<div th:replace="fragments/navigation :: navigation"></div>
 
 	<section layout:fragment="content">
+		<div class="jumbotron">
+			<h3>Choose your sound file...</h3>
+			<table class="table">
+				<thead>
+					<tr>
+						<th style="width: 50%" >File Name</th>
+						<th style="width: 50%" >Remove</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="file : ${soundFiles}">
+						<th scope="row" th:text="${file.filename}"></th>
+						<td>
+							<form action="#" th:action="@{select-sound}" method="post">
+								<input type="hidden" name="filename" th:value="${file.file.name}" />
+								<button class="btn btn-sm btn-primary " th:id="select-sound" type="submit">Select Music</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 
-		<h3>Choose your sound file...</h3>
-		<table class="table">
-			<thead>
-				<tr>
-					<th class="col-xs-6" scope="col">File Name</th>
-					<th class="col-xs-6" scope="col">Remove</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="file : ${soundFiles}">
-					<th scope="row" th:text="${file.filename}"></th>
-					<td><form action="#" th:action="@{select-sound}" method="post">
-							<input type="hidden" name="filename" th:value="${file.file.name}" />
-							<button class="btn btn-sm btn-primary " th:id="select-sound" type="submit">Select Music</button>
-						</form></td>
-				</tr>
-			</tbody>
-		</table>
-		<hr>
-		<h3>Video Files</h3>
-		<a th:href="@{select-video-all}">Select All Videos</a>
-		<table class="table">
-			<thead>
-				<tr>
-					<th class="col-xs-6" scope="col">File Name</th>
-					<th class="col-xs-6" scope="col">Remove</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="file : ${videoFiles}">
-					<th scope="row" th:text="${file.filename}"></th>
-					<td><form action="#" th:action="@{select-video}" method="post">
-							<input type="hidden" name="filepath" th:value="${file.file.path}" />
-							<button class="btn btn-sm btn-primary " th:id="select-video" type="submit">Select Video</button>
-						</form></td>
-				</tr>
-			</tbody>
-		</table>
-		<hr>
-		<h3>Chosen Files</h3>
-		<h4>Current Background Music --></h4>
-		<h4 th:text="${sound}"></h4>
-		<br>
-		<a th:href="@{empty-fsr}">Clear</a>
+		<div class="jumbotron">
+			<h3>Video Files</h3>
+			<a th:href="@{select-video-all}">Select All Videos</a>
+			<table class="table">
+				<thead>
+					<tr>
+						<th style="width: 50%" >File Name</th>
+						<th style="width: 50%" >Remove</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="file : ${videoFiles}">
+						<th scope="row" th:text="${file.filename}"></th>
+						<td>
+							<form action="#" th:action="@{select-video}" method="post">
+								<input type="hidden" name="filepath" th:value="${file.file.path}" />
+								<button class="btn btn-sm btn-primary pull-left" th:id="select-video" type="submit">Select Video</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="jumbotron">
+			<h3>Chosen Files</h3>
+			<h4>Current Background Music --></h4>
+			<h4 th:text="${sound}"></h4>
+			<br>
+			<a th:href="@{empty-fsr}">Clear</a>
 
-		<table class="table">
-			<thead>
-				<tr>
-					<th class="col-xs-6" scope="col">File Name</th>
-					<th class="col-xs-6" scope="col">Remove</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="file : ${specFiles}">
-					<th scope="row" th:text="${file.origFilename}"></th>
-					<td><form action="#" th:action="@{remove-file-spec}" method="post">
-							<input type="hidden" name="filepath" th:value="${file.filename}" />
-							<button class="btn btn-sm btn-primary " th:id="remove-file-spec" type="submit">Remove</button>
-						</form></td>
-				</tr>
-			</tbody>
-		</table>
-
-		<hr>
+			<table class="table">
+				<thead>
+					<tr>
+						<th style="width: 50%">File Name</th>
+						<th style="width: 50%">Remove</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="file : ${specFiles}">
+						<th scope="row" th:text="${file.origFilename}"></th>
+						<td>
+							<form action="#" th:action="@{remove-file-spec}" method="post">
+								<input type="hidden" name="filepath" th:value="${file.filename}" />
+								<button class="btn btn-sm btn-primary " th:id="remove-file-spec" type="submit">Remove</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 		<form action="#" th:action="@{trim-video}" method="post">
 			<input type="hidden" name="fsr" th:value="${fsr}" />
 			<button class="btn btn-sm btn-primary " th:id="trim-em" type="submit">Trim 'em up!</button>

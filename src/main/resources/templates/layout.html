@@ -6,14 +6,19 @@
 
 <body>
 	<div th:replace="fragments/navigation :: navigation"></div>
-
-	<p th:text="${message}"></p>
-	<h3 th:text="${stupidmessage}"></h3>
+	<div th:if="${message != null}" class="main-content container">
+		<div class="message-container">
+			<p class="message" th:text="${message}"></p>
+		</div>
+	</div>
+	<div th:unless="${message != null}" class="main-content container">
+		<div>
+		<br>
+		</div>
+	</div>
+	
 	<div class="main-content container" layout:fragment="content"></div>
 
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="../js/bootstrap.min.js"></script>
+	<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

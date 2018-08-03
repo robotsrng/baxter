@@ -5,14 +5,137 @@
 </head>
 <body>
 	<section layout:fragment="content">
-		<div class="container">
-			<div class="jumbotron">
-				<h1>Baxter</h1>
-				<p>Welcome to Baxter!!</p>
-				<img class="img-circle" alt="Baxter" src="/images/bluedog.jpg">
-			</div>
-		</div>
 
+		<div sec:authorize="isAuthenticated()">
+			<section class="features-icons bg-light text-center jumbotron">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+								<div class="features-icons-icon d-flex">
+									<i class="icon-screen-desktop m-auto text-primary"></i>
+								</div>
+								<h3>
+									<a href="#" th:href="@{/baxt/baxt-start}">Start Project</a>
+								</h3>
+								<p class="lead mb-0">Start a new project here!</p>
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+								<div class="features-icons-icon d-flex">
+									<i class="icon-layers m-auto text-primary"></i>
+								</div>
+								<h3>
+									<a href="#" th:href="@{/baxt/upload-page}">Manage Files</a>
+								</h3>
+								<p class="lead mb-0">Upload, Baxt, Download, Rinse, Repeat.</p>
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="features-icons-item mx-auto mb-0 mb-lg-3">
+								<div class="features-icons-icon d-flex">
+									<i class="icon-check m-auto text-primary"></i>
+								</div>
+								<h3>
+									<a href="#" th:href="@{/}">Account</a>
+								</h3>
+								<p class="lead mb-0">This is coming soon!</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<div sec:authorize="!isAuthenticated()">
+			<header class="masthead text-white text-center">
+				<div class="overlay"></div>
+				<div class="container">
+					<div class="row">
+						<div class="col-xl-9 mx-auto">
+							<h1 class="mb-5">Build the perfect video in seconds!</h1>
+						</div>
+						<div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+							<form>
+								<div class="form-row">
+									<div class="col-12 col-md-9 mb-2 mb-md-0">
+										<input type="email" class="form-control form-control-lg" placeholder="Enter your email...">
+									</div>
+									<div class="col-12 col-md-3">
+										<button type="submit" class="btn btn-block btn-lg btn-primary">Sign up!</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</header>
+
+
+			<!-- Icons Grid -->
+			<section class="features-icons bg-light text-center">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+								<div class="features-icons-icon d-flex">
+									<i class="icon-screen-desktop m-auto text-primary"></i>
+								</div>
+								<h3>Sign Up For Free</h3>
+								<p class="lead mb-0">Quickly create an account and start trimming like a pro!</p>
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+								<div class="features-icons-icon d-flex">
+									<i class="icon-layers m-auto text-primary"></i>
+								</div>
+								<h3>Upload Your Videos and Music</h3>
+								<p class="lead mb-0">Free 500mb of storage space for free users to play with!</p>
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<div class="features-icons-item mx-auto mb-0 mb-lg-3">
+								<div class="features-icons-icon d-flex">
+									<i class="icon-check m-auto text-primary"></i>
+								</div>
+								<h3>Quick And Easy Editing</h3>
+								<p class="lead mb-0">Select what parts of your videos you want and don't want with the click of a button!</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+
+
+			<section class="showcase">
+				<div class="container-fluid p-0">
+					<div class="row no-gutters">
+
+						<div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('img/bg-showcase-1.jpg');"></div>
+						<div class="col-lg-6 order-lg-1 my-auto showcase-text">
+							<h2>Simple and Easy Video Creation</h2>
+							<p class="lead mb-0">Don't worry about formats, roations or sizes. Baxter will resize, reshape and reformat most any video and deliver a quality product.</p>
+						</div>
+					</div>
+					<div class="row no-gutters">
+						<div class="col-lg-6 text-white showcase-img" style="background-image: url('img/bg-showcase-2.jpg');"></div>
+						<div class="col-lg-6 my-auto showcase-text">
+							<h2>Easy to Use &amp; Customize</h2>
+							<p class="lead mb-0">Just pick your music, your videos and the times you want to use. No muss, no fuss, just Baxter.</p>
+						</div>
+					</div>
+					<div class="row no-gutters">
+						<div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('img/bg-showcase-3.jpg');"></div>
+						<div class="col-lg-6 order-lg-1 my-auto showcase-text">
+							<h2>Take Baxter anywhere!</h2>
+							<p class="lead mb-0">Use the website or download the standalone Baxter application (coming soon) and edit like a pro anywhere!</p>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
 
 
 	</section>
