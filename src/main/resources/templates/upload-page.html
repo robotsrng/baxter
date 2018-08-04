@@ -30,21 +30,23 @@
 			<tbody>
 				<tr th:each="file : ${soundFiles}">
 					<th scope="row" th:text="${file.filename}"></th>
-					<td><form action="#" th:action="@{remove-file}" method="post">
+					<td>
+						<form action="#" th:action="@{remove-file}" method="post">
 							<input type="hidden" name="username" th:value="${username}" />
 							<input type="hidden" name="filepath" th:value="${file.file.path}" />
 							<button th:id="remove-file" type="submit">Remove</button>
-						</form></td>
-					<td><form action="#" th:action="@{change-filename}" method="post">
-							<input type="hidden" name="username" th:value="${username}" />
-							<input type="hidden" name="filepath" th:value="${file.file.path}" />
-							<button th:id="change-filename" type="submit">Change Name</button>
-						</form></td>
+						</form>
+					</td>
+					<td>
+						<form action="#" th:action="@{rename-file}" method="post">
+							<input type="hidden" th:id="|${file.file.path}_username|" name="username" th:value="${username}" />
+							<input type="hidden" th:id="|${file.file.path}_filepath|" name="filepath" th:value="${file.file.path}" />
+						</form>
+						<button th:onclick="|renameFile('${file.file.path}_filepath', '${file.file.path}_username')|" th:id="change-filename">Change Name</button>
+					</td>
 				</tr>
 			</tbody>
 		</table>
-		<h4>Current Background Music --></h4>
-		<h4 th:text="${sound}"></h4>
 		<hr>
 		<h3>Choose Your Videos</h3>
 		<p>The files need to be .mp4 , .mov or .wav</p>
@@ -70,16 +72,20 @@
 			<tbody>
 				<tr th:each="file : ${videoFiles}">
 					<th scope="row" th:text="${file.filename}"></th>
-					<td><form action="#" th:action="@{remove-file}" method="post">
+					<td>
+						<form action="#" th:id="${file.file.path}" th:action="@{remove-file}" method="post">
 							<input type="hidden" name="username" th:value="${username}" />
 							<input type="hidden" name="filepath" th:value="${file.file.path}" />
 							<button th:id="remove-file" type="submit">Remove</button>
-						</form></td>
-					<td><form action="#" th:action="@{change-filename}" method="post">
-							<input type="hidden" name="username" th:value="${username}" />
-							<input type="hidden" name="filepath" th:value="${file.file.path}" />
-							<button th:id="change-filename" type="submit">Change Name</button>
-						</form></td>
+						</form>
+					</td>
+					<td>
+						<form action="#" th:action="@{rename-file}" method="post">
+							<input type="hidden" th:id="|${file.file.path}_username|" name="username" th:value="${username}" />
+							<input type="hidden" th:id="|${file.file.path}_filepath|" name="filepath" th:value="${file.file.path}" />
+						</form>
+						<button th:onclick="|renameFile('${file.file.path}_filepath', '${file.file.path}_username')|" th:id="change-filename">Change Name</button>
+					</td>
 				</tr>
 			</tbody>
 		</table>

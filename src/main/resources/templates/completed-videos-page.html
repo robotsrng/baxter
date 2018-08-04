@@ -1,0 +1,44 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+
+</head>
+<body>
+
+	<section layout:fragment="content">
+		<p>
+			Storage Usage : <span th:text="${storage}"></span>mb / 1000mb
+		</p>
+
+		<h3>Baxted Videos</h3>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th class="col-xs-6" scope="col">File Name</th>
+					<th class="col-xs-3" scope="col">Remove</th>
+					<th class="col-xs-3" scope="col">Change name</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="file : ${completedFiles}">
+					<th scope="row" th:text="${file.filename}"></th>
+					<td><form action="#" th:action="@{remove-file}" method="post">
+							<input type="hidden" name="username" th:value="${username}" />
+							<input type="hidden" name="filepath" th:value="${file.file.path}" />
+							<button th:id="remove-file" type="submit">Remove</button>
+						</form></td>
+					<td><form action="#" th:action="@{change-filename}" method="post">
+							<input type="hidden" name="username" th:value="${username}" />
+							<input type="hidden" name="filepath" th:value="${file.file.path}" />
+							<button th:id="change-filename" type="submit">Change Name</button>
+						</form></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<br>
+	</section>
+</body>
+
+</html>

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,6 +94,25 @@ public class UploadController {
 		return (file.delete());
 	}
 
+	public static boolean renameFile(String filepath, String username, String newName) {
+		File file = new File(filepath);
+		Path filePath = file.toPath();
+		File file2 = null;
+		try {
+			System.out.println(Files.probeContentType(filePath).split("/")[1]);
+			file2 = new File((file.getParentFile() + File.separator + newName + "." + (Files.probeContentType(filePath).split("/")[1])));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			Files.move(file.toPath(), file2.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return (file.delete());
+	}
+
 	public static long getUserStorage(String currentUserName) {
 		Path folder = Paths.get(userFileDir + currentUserName);
 		long size = -1 ;
@@ -127,6 +147,14 @@ public class UploadController {
 		return files;
 	}
 
+	static  List<FileDisplayHolder> getUserCompletedFiles(String username) {
+		List<FileDisplayHolder> files = new ArrayList<>();
+		for(File file : new File(userFileDir + username + finalVidDir).listFiles()){
+			files.add(new FileDisplayHolder(file, FilenameUtils.removeExtension(file.getName()))) ;
+		}
+		return files;
+	}
+
 	public static String getUserSoundDir(String filename, String currentUserName) {
 		File file = new File(userFileDir + currentUserName + userSoundDir + filename);
 		if(file.exists()) {
@@ -134,7 +162,7 @@ public class UploadController {
 		}
 		return null;
 	}
-	
+
 	public static String getUserWaveDir(String filename, String currentUserName) {
 		File file = new File(userFileDir + currentUserName + userWaveDir + filename.replace("wav", "png"));
 		if(file.exists()) {
@@ -146,10 +174,10 @@ public class UploadController {
 	public static String getUserOutputDir(String username) {
 		return userFileDir + username + finalVidDir;
 	}
-	
+
 	public static byte[] getImage(String imageName, String username) throws IOException {
-	    File serverFile = new File(userFileDir + username + userWaveDir + imageName.replace("wav", "png"));
-	    return Files.readAllBytes(serverFile.toPath());
+		File serverFile = new File(userFileDir + username + userWaveDir + imageName.replace("wav", "png"));
+		return Files.readAllBytes(serverFile.toPath());
 	}
 
 	public static boolean checkUserDir(String username) { 
@@ -168,4 +196,6 @@ public class UploadController {
 		}
 		return true;
 	}
+
+
 }

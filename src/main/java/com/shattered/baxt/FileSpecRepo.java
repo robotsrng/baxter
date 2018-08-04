@@ -131,6 +131,7 @@ public class FileSpecRepo {
 		workingFS.setTrimEnd(round(end, 1));
 		maxLength += (workingFS.getTrimEnd() - workingFS.getTrimStart());
 		System.out.println(workingFS.getDuration());
+		System.out.println("1*  - " + maxLength);
 		return 0 ;
 	}
 	
@@ -145,6 +146,7 @@ public class FileSpecRepo {
 		workingFS.setTrimStart(round(start, 1));
 		workingFS.setTrimEnd(round(end, 1));
 		maxLength += (workingFS.getTrimEnd() - workingFS.getTrimStart());
+		System.out.println("2*  - " + maxLength);
 		return 0 ;
 	}
 	
@@ -172,7 +174,7 @@ public class FileSpecRepo {
 
 	//*******************************************
 	// Getters and Setters
-	//*******************************************
+	//******************************************* 
 
 	public void removeFileSpec(String filename) {
 		FileSpec workingFS = getFileSpecByFileName(filename);

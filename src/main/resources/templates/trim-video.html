@@ -34,7 +34,8 @@
 					<th class="col-xs-2" scope="col">File Name</th>
 					<th class="col-xs-1" scope="col">Up</th>
 					<th class="col-xs-1" scope="col">Down</th>
-					<th class="col-xs-6" scope="col">Trim</th>
+					<th class="col-xs-5" scope="col"></th>
+					<th class="col-xs-5" scope="col">Trim</th>
 					<th class="col-xs-1" scope="col">Copy</th>
 					<th class="col-xs-1" scope="col">Delete</th>
 				</tr>
@@ -44,26 +45,27 @@
 				<tr th:each="file : ${files}">
 					<th scope="row" th:text="${file.origFilename}"></th>
 					<td>
-						<form action="#" th:action="@{trim-action}" method="post">
+						<form action="#" th:action="@{move-video-up}" method="post">
 							<input type="hidden" name="file" th:value="${file.filename}" />
-							<button th:name="trim-action" th:value="up" id="move-video-up" type="submit">Up</button>
+							<button class="btn btn-sm btn-primary " th:id="move-video-up" type="submit">Up</button>
 						</form>
 					</td>
 					<td>
 						<form action="#" th:action="@{move-video-down}" method="post">
 							<input type="hidden" name="file" th:value="${file.filename}" />
-							<button th:id="move-video-down" type="submit">Down</button>
+							<button class="btn btn-sm btn-primary " th:id="move-video-down" type="submit">Down</button>
 						</form>
 					</td>
 					<td class="trim-td">
-						<form action="#" th:action="@{set-video-trim}" method="post">
+						<form action="#" th:id="${file.filename + 'form'}" th:name="${file.filename + 'form'}" th:action="@{set-video-trim}" method="post">
 							<input type="hidden" name="filename" th:value="${file.filename}" />
 							<div class="slider-group pull-left">
 								<input type="range" min="0" th:max="${file.duration / 1000 + 1}" step=".5" name="trimStart" th:value="${file.trimStart}" class="form-control-range slider" th:id="|${file.filename + 'start'}|"
 									th:oninput="|showValStart('${file.filename + 'startbox'}', this.value)|" th:onchange="|showValStart('${file.filename + 'startbox'}', this.value)|"
 								>
-								<span class="slider-output" th:id="|${file.filename}startbox|" th:value="${file.trimStart}"></span>
-								<script th:inline="javascript">
+								<div class="output-width">
+									<span class="slider-output" th:id="|${file.filename}startbox|" th:value="${file.trimStart}"></span>
+									<script th:inline="javascript">
 									/*<![CDATA[*/
 									var element = document
 											.getElementById([[${file.filename + 'start'}]]);
@@ -77,6 +79,7 @@
 										element.dispatchEvent(evt);
 									}
 								</script>
+								</div>
 								<input type="range" min="0" th:max="${file.duration / 1000 + 1}" step=".5" name="trimEnd" th:value="${file.trimEnd}" class="form-control-range slider" th:id="|${file.filename + 'end'}|"
 									th:oninput="|showValEnd('${file.filename + 'endbox'}', this.value)|" th:onchange="|showValEnd('${file.filename + 'endbox'}', this.value)|"
 								>
@@ -98,21 +101,24 @@
 								</script>
 								</div>
 							</div>
-							<div class="slider-button pull-right">
-								<button th:id="trim-file" type="submit">Trim</button>
-							</div>
+
 						</form>
+					</td>
+					<td>
+						<div class="slider-button">
+							<button class="btn btn-sm btn-primary " th:id="trim-file" th:onclick="|submitTrimForm('${file.filename + 'form'}')|" >Trim</button>
+						</div>
 					</td>
 					<td>
 						<form action="#" th:action="@{copy-video}" method="post">
 							<input type="hidden" name="filepath" th:value="${file.inputURL}" />
-							<button th:id="select-video" type="submit">Copy</button>
+							<button class="btn btn-sm btn-primary "th:id="select-video" type="submit">Copy</button>
 						</form>
 					</td>
 					<td>
 						<form action="#" th:action="@{remove-file-spec-from-trim}" method="post">
 							<input type="hidden" name="filepath" th:value="${file.filename}" />
-							<button th:id="remove-file-spec" type="submit">Remove</button>
+							<button class="btn btn-sm btn-primary " th:id="remove-file-spec" type="submit">Remove</button>
 						</form>
 					</td>
 				<tr>
@@ -122,7 +128,7 @@
 		<br>
 		<form action="#" th:action="@{baxt-video}" method="post">
 			<input type="hidden" name="fsr" th:value="${fsr}" />
-			<button th:id="baxt-video" type="submit">Baxt It!</button>
+			<button class="btn btn-sm btn-primary " th:id="baxt-video" type="submit">Baxt It!</button>
 		</form>
 
 		<br>

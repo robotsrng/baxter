@@ -56,6 +56,15 @@ public class BaxterController {
 		return "upload-page" ;
 	}
 	
+	@RequestMapping("/baxt/show-completed-videos")
+	public String showCopmletedVideoPage(Model model, Principal principal, @RequestParam(value = "code", required = false) String code) {
+		model.addAttribute("message", CodeRepo.getMessage(code));
+		model.addAttribute("storage", UploadController.getUserStorage(currentUserName(principal)));
+		model.addAttribute("username", currentUserName(principal));
+		model.addAttribute("completedFiles", UploadController.getUserCompletedFiles(currentUserName(principal)));
+		return "completed-videos-page" ;
+	}
+	
 	@PostMapping("baxt/upload-sound")
 	public String refreshUploadSoundPage(Model model , @RequestParam("sound") MultipartFile multiPartFile, Principal principal, @RequestParam(value = "code", required = false) String code) {
 		model.addAttribute("message", CodeRepo.getMessage(code));
@@ -108,7 +117,27 @@ public class BaxterController {
 		model.addAttribute("storage", UploadController.getUserStorage(currentUserName(principal)));
 		model.addAttribute("soundFiles", UploadController.getUserSoundFiles(currentUserName(principal)));
 		model.addAttribute("videoFiles", UploadController.getUserVideoFilesDisplay(currentUserName(principal)));
-		return "upload-page";
+		return "redirect:/baxt/upload-page";
+	}
+	
+	@RequestMapping("baxt/remove-completed-file")
+	public String removeCompletedFile(Model model, Principal principal, @RequestParam("filepath") String filepath, @RequestParam("username") String username, @RequestParam(value = "code", required = false) String code) {
+		model.addAttribute("message", CodeRepo.getMessage(code));
+		UploadController.removeFile(filepath, username);
+		model.addAttribute("storage", UploadController.getUserStorage(currentUserName(principal)));
+		model.addAttribute("soundFiles", UploadController.getUserSoundFiles(currentUserName(principal)));
+		model.addAttribute("completedFiles", UploadController.getUserCompletedFiles(currentUserName(principal)));
+		return "redirect:/baxt/show-completed-videos";
+	}
+	
+	@RequestMapping("baxt/rename-file")
+	public String renameFile(Model model, Principal principal, @RequestParam("filepath") String filepath, @RequestParam("username") String username, @RequestParam("newName") String newName, @RequestParam(value = "code", required = false) String code) {
+		model.addAttribute("message", CodeRepo.getMessage(code));
+		UploadController.renameFile(filepath, username, newName);
+		model.addAttribute("storage", UploadController.getUserStorage(currentUserName(principal)));
+		model.addAttribute("soundFiles", UploadController.getUserSoundFiles(currentUserName(principal)));
+		model.addAttribute("videoFiles", UploadController.getUserVideoFilesDisplay(currentUserName(principal)));
+		return "redirect:/baxt/upload-page";
 	}
 	
 	@PostMapping("baxt/remove-file-spec")
