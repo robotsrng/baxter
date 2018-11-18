@@ -4,20 +4,7 @@
 
 </head>
 <body>
-	<section layout:fragment="content">
-		<h4>What point should your music start from? (Enter in seconds)</h4>
-		<h4 th:text="${sound}"></h4>
-		<p>
-			(<span th:text="${fsr.soundDuration}"></span> sec total)
-		</p>
-		<form action="#" th:action="@{set-sound-trim}" method="post">
-			<input type="text" name="soundTrim" th:value="${fsr.soundTrim}" />
-			<button th:id="trim-file" type="submit">Save Trim</button>
-		</form>
-		<div class="container">
-			<img class="waveform-img" th:src="@{'data:image/png;base64,'+${pw.generateBase64Image()}}" />
-		</div>
-		<hr>
+	<div th:fragment="table" th:id="trim-table">
 
 		<h3>Trim Files</h3>
 		<p>Enter numbers (in seconds)</p>
@@ -58,7 +45,7 @@
 						</form>
 					</td>
 					<td class="trim-td">
-						<form action="#" th:id="${file.filename + 'form'}" th:name="${file.filename + 'form'}" th:action="@{set-video-trim}" class="js-trim-form" method="post">
+						<form action="#" th:id="${file.filename + 'form'}" th:name="${file.filename + 'form'}" th:action="@{set-video-trim}" method="post">
 							<input type="hidden" name="filename" th:value="${file.filename}" />
 							<div class="slider-group pull-left">
 								<input type="range" min="0" th:max="${file.duration / 1000 + 1}" step=".5" name="trimStart" th:value="${file.trimStart}" class="js-slider form-control-range slider"
@@ -98,16 +85,7 @@
 			</tbody>
 		</table>
 
-		<br>
-		<form action="#" th:action="@{baxt-video}" method="post">
-			<input type="hidden" name="fsr" th:value="${fsr}" />
-			<button class="btn btn-sm btn-primary " th:id="js-trim-btn" type="submit">Baxt It!</button>
-		</form>
-		<br>
-		<script src="../js/jquery.min.js"></script>
-		<script src="../js/trim-video.js" type="text/javascript"></script>
 
-	</section>
+	</div>
 </body>
-
 </html>

@@ -84,11 +84,13 @@ header.masthead h1 {
   font-size: 5rem;
 }
 
+/*noinspection CssUnusedSymbol*/
 .testimonials {
   padding-top: 7rem;
   padding-bottom: 7rem;
 }
 
+/*noinspection CssUnusedSymbol*/
 .testimonials .testimonial-item {
   max-width: 18rem;
 }

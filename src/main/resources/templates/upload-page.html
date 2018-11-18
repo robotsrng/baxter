@@ -12,14 +12,14 @@
 		<h2>Upload Sound File</h2>
 		<p>The sound file must be a file of type .mp3 or .wav.</p>
 		<form method="post" th:action="@{upload-sound}" enctype="multipart/form-data">
-			<label class="btn btn-sm btn-primary "> <input name="sound" type="file" style="display: none;"> Choose Sound File
+			<label class="js-upload-btn btn btn-sm btn-primary "> <input name="sound" type="file" style="display: none;"> Choose Sound File
 			</label>
 			<br>
 			<br>
-			<button class="btn btn-sm btn-primary " type="submit">Upload</button>
+			<button class="js-upload-btn btn btn-sm btn-primary " type="submit">Upload</button>
 		</form>
 		<br>
-		<table class="table">
+		<table class="table js-sound-table">
 			<thead>
 				<tr>
 					<th class="col-xs-6" scope="col">File Name</th>
@@ -28,13 +28,13 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="file : ${soundFiles}">
+				<tr class="js-file-row" th:each="file : ${soundFiles}">
 					<th scope="row" th:text="${file.filename}"></th>
 					<td>
 						<form action="#" th:action="@{remove-file}" method="post">
 							<input type="hidden" name="username" th:value="${username}" />
 							<input type="hidden" name="filepath" th:value="${file.file.path}" />
-							<button th:id="remove-file" type="submit">Remove</button>
+							<button class="js-remove-file-btn btn btn-sm btn-primary " th:id="remove-file" type="submit">Remove</button>
 						</form>
 					</td>
 					<td>
@@ -42,7 +42,7 @@
 							<input type="hidden" th:id="|${file.file.path}_username|" name="username" th:value="${username}" />
 							<input type="hidden" th:id="|${file.file.path}_filepath|" name="filepath" th:value="${file.file.path}" />
 						</form>
-						<button th:onclick="|renameFile('${file.file.path}_filepath', '${file.file.path}_username')|" th:id="change-filename">Change Name</button>
+						<button class="js-upload-btn btn btn-sm btn-primary " th:onclick="|renameFile('${file.file.path}', '${username}')|" th:id="change-filename">Change Name</button>
 					</td>
 				</tr>
 			</tbody>
@@ -52,16 +52,16 @@
 		<p>The files need to be .mp4 , .mov or .wav</p>
 		<p>Files must be smaller than 500mb</p>
 		<form method="post" th:action="@{upload-video}" enctype="multipart/form-data">
-			<label class="btn btn-sm btn-primary "> <input name="videos" type="file" multiple="multiple" style="display: none;"> Choose Videos
+			<label class="js-upload-btn btn btn-sm btn-primary "> <input name="videos" type="file" multiple="multiple" style="display: none;"> Choose Videos
 			</label>
 			<br>
 			<br>
-			<button class="btn btn-sm btn-primary " type="submit">Upload</button>
+			<button class="js-upload-btn btn btn-sm btn-primary " type="submit">Upload</button>
 		</form>
 
 		<h3>Uploaded Files</h3>
 
-		<table class="table">
+		<table class="table js-video-table">
 			<thead>
 				<tr>
 					<th class="col-xs-6" scope="col">File Name</th>
@@ -70,27 +70,27 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="file : ${videoFiles}">
+				<tr class="js-file-row" th:each="file : ${videoFiles}">
 					<th scope="row" th:text="${file.filename}"></th>
 					<td>
-						<form action="#" th:id="${file.file.path}" th:action="@{remove-file}" method="post">
+						<form class="js-remove-form"action="#" th:id="${file.file.path}" th:action="@{remove-file}" method="post">
 							<input type="hidden" name="username" th:value="${username}" />
 							<input type="hidden" name="filepath" th:value="${file.file.path}" />
-							<button th:id="remove-file" type="submit">Remove</button>
+							<button class="js-remove-file-btn btn btn-sm btn-primary " th:id="remove-file" type="button">Remove</button>
 						</form>
 					</td>
 					<td>
-						<form action="#" th:action="@{rename-file}" method="post">
 							<input type="hidden" th:id="|${file.file.path}_username|" name="username" th:value="${username}" />
 							<input type="hidden" th:id="|${file.file.path}_filepath|" name="filepath" th:value="${file.file.path}" />
-						</form>
-						<button th:onclick="|renameFile('${file.file.path}_filepath', '${file.file.path}_username')|" th:id="change-filename">Change Name</button>
+						<button class="js-upload-btn btn btn-sm btn-primary " th:onclick="|renameFile('${file.file.path}', '${username}')|" th:id="change-filename">Change Name</button>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 		<br>
 		<br>
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/upload-page.js" type="text/javascript"></script>
 	</section>
 </body>
 

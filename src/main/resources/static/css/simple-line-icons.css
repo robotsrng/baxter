@@ -9,6 +9,7 @@
  Use the following CSS code if you want to have a class per icon.
  Instead of a list of all class selectors, you can use the generic [class*="icon-"] selector, but it's slower:
 */
+/*noinspection CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol,CssUnusedSymbol*/
 .icon-user,
 .icon-people,
 .icon-user-female,
@@ -215,24 +216,36 @@
 .icon-people:before {
   content: "\e001";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-user-female:before {
   content: "\e000";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-user-follow:before {
   content: "\e002";
 }
 .icon-user-following:before {
   content: "\e003";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-user-unfollow:before {
   content: "\e004";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-login:before {
   content: "\e066";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-logout:before {
   content: "\e065";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-emotsmile:before {
   content: "\e021";
 }
@@ -251,15 +264,21 @@
 .icon-map:before {
   content: "\e033";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-location-pin:before {
   content: "\e096";
 }
 .icon-direction:before {
   content: "\e042";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-directions:before {
   content: "\e041";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-compass:before {
   content: "\e045";
 }
@@ -305,6 +324,8 @@
 .icon-check:before {
   content: "\e080";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-clock:before {
   content: "\e081";
 }
@@ -326,9 +347,13 @@
 .icon-organization:before {
   content: "\e616";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-trophy:before {
   content: "\e006";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-screen-smartphone:before {
   content: "\e010";
 }
@@ -338,21 +363,31 @@
 .icon-plane:before {
   content: "\e012";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-notebook:before {
   content: "\e013";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-mustache:before {
   content: "\e014";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-mouse:before {
   content: "\e015";
 }
 .icon-magnet:before {
   content: "\e016";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-energy:before {
   content: "\e020";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-disc:before {
   content: "\e022";
 }
@@ -362,39 +397,59 @@
 .icon-cursor-move:before {
   content: "\e023";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-crop:before {
   content: "\e024";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-chemistry:before {
   content: "\e026";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-speedometer:before {
   content: "\e007";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-shield:before {
   content: "\e00e";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-screen-tablet:before {
   content: "\e00f";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-magic-wand:before {
   content: "\e017";
 }
 .icon-hourglass:before {
   content: "\e018";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-graduation:before {
   content: "\e019";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-ghost:before {
   content: "\e01a";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-game-controller:before {
   content: "\e01b";
 }
 .icon-fire:before {
   content: "\e01c";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-eyeglass:before {
   content: "\e01d";
 }
@@ -413,33 +468,49 @@
 .icon-anchor:before {
   content: "\e029";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-wallet:before {
   content: "\e02a";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-vector:before {
   content: "\e02b";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-speech:before {
   content: "\e02c";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-puzzle:before {
   content: "\e02d";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-printer:before {
   content: "\e02e";
 }
 .icon-present:before {
   content: "\e02f";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-playlist:before {
   content: "\e030";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-pin:before {
   content: "\e031";
 }
 .icon-picture:before {
   content: "\e032";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-handbag:before {
   content: "\e035";
 }
@@ -458,30 +529,44 @@
 .icon-film:before {
   content: "\e03a";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-feed:before {
   content: "\e03b";
 }
 .icon-drop:before {
   content: "\e03e";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-drawer:before {
   content: "\e03f";
 }
 .icon-docs:before {
   content: "\e040";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-doc:before {
   content: "\e085";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-diamond:before {
   content: "\e043";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-cup:before {
   content: "\e044";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-calculator:before {
   content: "\e049";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-bubbles:before {
   content: "\e04a";
 }
@@ -491,24 +576,34 @@
 .icon-book-open:before {
   content: "\e04c";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-basket-loaded:before {
   content: "\e04d";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-basket:before {
   content: "\e04e";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-bag:before {
   content: "\e04f";
 }
 .icon-action-undo:before {
   content: "\e050";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-action-redo:before {
   content: "\e051";
 }
 .icon-wrench:before {
   content: "\e052";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-umbrella:before {
   content: "\e053";
 }
@@ -521,6 +616,8 @@
 .icon-support:before {
   content: "\e056";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-frame:before {
   content: "\e038";
 }
@@ -530,6 +627,8 @@
 .icon-size-actual:before {
   content: "\e058";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-shuffle:before {
   content: "\e059";
 }
@@ -539,12 +638,16 @@
 .icon-share:before {
   content: "\e05b";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-rocket:before {
   content: "\e05c";
 }
 .icon-question:before {
   content: "\e05d";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-pie-chart:before {
   content: "\e05e";
 }
@@ -563,21 +666,33 @@
 .icon-grid:before {
   content: "\e06a";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-graph:before {
   content: "\e06b";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-microphone:before {
   content: "\e063";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-music-tone-alt:before {
   content: "\e061";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-music-tone:before {
   content: "\e062";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-earphones-alt:before {
   content: "\e03c";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-earphones:before {
   content: "\e03d";
 }
@@ -587,12 +702,16 @@
 .icon-like:before {
   content: "\e068";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-dislike:before {
   content: "\e06d";
 }
 .icon-control-start:before {
   content: "\e06f";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-control-rewind:before {
   content: "\e070";
 }
@@ -620,18 +739,26 @@
 .icon-calendar:before {
   content: "\e075";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-bulb:before {
   content: "\e076";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-chart:before {
   content: "\e077";
 }
 .icon-ban:before {
   content: "\e07c";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-bubble:before {
   content: "\e07d";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-camrecorder:before {
   content: "\e07e";
 }
@@ -671,39 +798,59 @@
 .icon-lock-open:before {
   content: "\e08f";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-magnifier:before {
   content: "\e090";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-magnifier-add:before {
   content: "\e091";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-magnifier-remove:before {
   content: "\e092";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-paper-clip:before {
   content: "\e093";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-paper-plane:before {
   content: "\e094";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-power:before {
   content: "\e097";
 }
 .icon-refresh:before {
   content: "\e098";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-reload:before {
   content: "\e099";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-settings:before {
   content: "\e09a";
 }
 .icon-star:before {
   content: "\e09b";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-symbol-female:before {
   content: "\e09c";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-symbol-male:before {
   content: "\e09d";
 }
@@ -713,66 +860,108 @@
 .icon-credit-card:before {
   content: "\e025";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-paypal:before {
   content: "\e608";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-social-tumblr:before {
   content: "\e00a";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-social-twitter:before {
   content: "\e009";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-social-facebook:before {
   content: "\e00b";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-social-instagram:before {
   content: "\e609";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-social-linkedin:before {
   content: "\e60a";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-social-pinterest:before {
   content: "\e60b";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-social-github:before {
   content: "\e60c";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-social-google:before {
   content: "\e60d";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-social-reddit:before {
   content: "\e60e";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-social-skype:before {
   content: "\e60f";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-social-dribbble:before {
   content: "\e00d";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-social-behance:before {
   content: "\e610";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-social-foursqare:before {
   content: "\e611";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-social-soundcloud:before {
   content: "\e612";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-social-spotify:before {
   content: "\e613";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-social-stumbleupon:before {
   content: "\e614";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-social-youtube:before {
   content: "\e008";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-social-dropbox:before {
   content: "\e00c";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-social-vkontakte:before {
   content: "\e618";
 }
+
+/*noinspection CssUnusedSymbol*/
 .icon-social-steam:before {
   content: "\e620";
 }

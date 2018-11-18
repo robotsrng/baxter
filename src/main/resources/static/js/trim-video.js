@@ -12,9 +12,12 @@ function submitTrimForm(formName){
 	document.getElementById(formName).submit();
 }
 
+function reloadTable(){
+
+}
+
 function eventFire(){
 	var sliders = document.getElementsByClassName("js-slider");
-	console.log('workingfire');
 	$(".js-slider").trigger('change');
 }
 

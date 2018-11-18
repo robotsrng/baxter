@@ -18,7 +18,6 @@
 			<img class="waveform-img" th:src="@{'data:image/png;base64,'+${pw.generateBase64Image()}}" />
 		</div>
 		<hr>
-
 		<h3>Trim Files</h3>
 		<p>Enter numbers (in seconds)</p>
 		<a th:href="@{randomize-trim-all}">Randomize</a>
@@ -48,17 +47,17 @@
 					<td>
 						<form action="#" th:action="@{move-video-up}" method="post">
 							<input type="hidden" name="file" th:value="${file.filename}" />
-							<button class="js-trim-btn btn btn-sm btn-primary " th:id="js-trim-btn" type="submit">Up</button>
+							<button class="js-trim-btn btn btn-sm btn-primary " th:id="move-video-up" type="submit">Up</button>
 						</form>
 					</td>
 					<td>
 						<form action="#" th:action="@{move-video-down}" method="post">
 							<input type="hidden" name="file" th:value="${file.filename}" />
-							<button class="js-trim-btn btn btn-sm btn-primary " th:id="js-trim-btn" type="submit">Down</button>
+							<button class="js-trim-btn btn btn-sm btn-primary " th:id="move-video-down" type="submit">Down</button>
 						</form>
 					</td>
 					<td class="trim-td">
-						<form action="#" th:id="${file.filename + 'form'}" th:name="${file.filename + 'form'}" th:action="@{set-video-trim}" class="js-trim-form" method="post">
+						<form action="#" th:id="${file.filename + 'form'}" th:name="${file.filename + 'form'}" th:action="@{set-video-trim}" method="post">
 							<input type="hidden" name="filename" th:value="${file.filename}" />
 							<div class="slider-group pull-left">
 								<input type="range" min="0" th:max="${file.duration / 1000 + 1}" step=".5" name="trimStart" th:value="${file.trimStart}" class="js-slider form-control-range slider"
@@ -79,19 +78,19 @@
 					</td>
 					<td>
 						<div class="slider-button">
-							<button class="js-trim-btn btn btn-sm btn-primary " th:id="js-trim-btn" th:onclick="|submitTrimForm('${file.filename + 'form'}')|">Trim</button>
+							<button class="js-trim-btn btn btn-sm btn-primary " th:id="trim-file" th:onclick="|submitTrimForm('${file.filename + 'form'}')|">Trim</button>
 						</div>
 					</td>
 					<td>
 						<form action="#" th:action="@{copy-video}" method="post">
 							<input type="hidden" name="filepath" th:value="${file.inputURL}" />
-							<button class="js-trim-btn btn btn-sm btn-primary " th:id="js-trim-btn" type="submit">Copy</button>
+							<button class="js-trim-btn btn btn-sm btn-primary " th:id="select-video" type="submit">Copy</button>
 						</form>
 					</td>
 					<td>
 						<form action="#" th:action="@{remove-file-spec-from-trim}" method="post">
 							<input type="hidden" name="filepath" th:value="${file.filename}" />
-							<button class="js-trim-btn btn btn-sm btn-primary " th:id="js-trim-btn" type="submit">Remove</button>
+							<button class="js-trim-btn btn btn-sm btn-primary " th:id="remove-file-spec" type="submit">Remove</button>
 						</form>
 					</td>
 				<tr>
@@ -101,12 +100,11 @@
 		<br>
 		<form action="#" th:action="@{baxt-video}" method="post">
 			<input type="hidden" name="fsr" th:value="${fsr}" />
-			<button class="btn btn-sm btn-primary " th:id="js-trim-btn" type="submit">Baxt It!</button>
+			<button class="btn btn-sm btn-primary " th:id="baxt-video" type="submit">Baxt It!</button>
 		</form>
 		<br>
 		<script src="../js/jquery.min.js"></script>
 		<script src="../js/trim-video.js" type="text/javascript"></script>
-
 	</section>
 </body>
 
